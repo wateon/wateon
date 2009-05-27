@@ -18,6 +18,6 @@ subject : Advanced Web Programming Design and Practice<br>
 What is the WateOn?<br>
 WateOn is the NateOn that is serviced in SK using web browser.<br>
 
-
+<a href="javascript:openWateOn()">open</a>
 </body>
 </html>
