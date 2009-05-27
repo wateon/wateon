@@ -7,19 +7,18 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import kfmes.natelib.*;
-
+import kfmes.natelib.NateonMessenger;
 
 /**
- * Servlet implementation class LoginServlet
+ * Servlet implementation class LogoutServlet
  */
-public class LoginServlet extends HttpServlet {
+public class LogoutServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LoginServlet() {
+    public LogoutServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -39,23 +38,22 @@ public class LoginServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		call(request, response);
 	}
-	
 	private void call(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		String id = request.getParameter("id");
-		String password = request.getParameter("password");
 		NateonMessenger nateOn = new NateonMessenger();
-		nateOn.login(id, password);
+// 객체를 받아와야겠어염.
+		nateOn.logout();
 		
 		if(nateOn.isLoggedIn()==true) {
-			String url = "/WateOn/wateon_logged.jsp";
+			//로그아웃실패
+			String url = "/exam/list.jsp";
 			RequestDispatcher dispatcher = request.getRequestDispatcher(url);
 			dispatcher.forward(request, response);
 		} else {
+			//로그아웃성공
 			String url = "/index.jsp";
 			RequestDispatcher dispatcher = request.getRequestDispatcher(url);
 			dispatcher.forward(request, response);
 		}
-		System.out.println(id+" "+password);
 	}
 }

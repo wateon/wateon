@@ -5,7 +5,8 @@
 <script language="javascript" type="text/javascript">
 function openWateOn() {
 	window.open("./WateOn/wateon_main.jsp",'WateOn', 'top=100, left=700 width=300, height=500, scrollbar=yes');
-}</script>
+}
+</script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Project WateOn</title>
 
