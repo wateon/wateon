@@ -46,7 +46,7 @@ public class LogoutServlet extends HttpServlet {
 		
 		if(nateOn.isLoggedIn()==true) {
 			//로그아웃실패
-			String url = "/exam/list.jsp";
+			String url = "/view/list.jsp";
 			RequestDispatcher dispatcher = request.getRequestDispatcher(url);
 			dispatcher.forward(request, response);
 		} else {

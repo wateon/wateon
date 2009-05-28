@@ -48,7 +48,7 @@ public class LoginServlet extends HttpServlet {
 		nateOn.login(id, password);
 		
 		if(nateOn.isLoggedIn()==true) {
-			String url = "/WateOn/wateon_logged.jsp";
+			String url = "/view/list.jsp";
 			RequestDispatcher dispatcher = request.getRequestDispatcher(url);
 			dispatcher.forward(request, response);
 		} else {
