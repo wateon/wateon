@@ -1,12 +1,16 @@
 package wateon.servlet;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import kfmes.natelib.entity.GroupList;
 
 import wateon.WateOn;
 import wateon.WateOnUser;
@@ -45,6 +49,11 @@ public class MainServlet extends HttpServlet {
 		if (user != null && user.isLogged()) {
 			// TODO: 리스트를 보여준다.
 			String url = "/view/main.jsp";
+			
+			// FIXME: 나중에 친구의 다른 정보도 포함해서 돌려주자.
+			GroupList groups = user.getNateonMessenger().getBuddyGroup();
+			request.setAttribute("groups", groups.getList());
+			
 			RequestDispatcher dispatcher = request.getRequestDispatcher(url);
 			dispatcher.forward(request, response);
 		}
