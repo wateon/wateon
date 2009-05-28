@@ -3,25 +3,14 @@
 <html>
 <head>
 <script language="javascript" type="text/javascript">
-function deleteValue(str) {
-	document.getElementById(str).value="";
+function hello() {
 }
-function connectToRegister() {
-	window.open("http://member.nate.com/sccustomer/join/nate/nateon/regist.jsp",'Register', 'top=300, left=500 width=450, height=370, scrollbar=no');
-}
-
 </script>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>WateOn</title>
 </head>
 <body>
-<H3>WateOn</H3>
-<form name="Login" action="../LoginServlet" method="post">
-<input type="text" size="30" name="id" value="id" onfocus="deleteValue('id')"><br>
-<input type="password" size="33" name="password" value="password" onfocus="deleteValue('password')"><br>
-<input type="hidden" name="action" value="login">
-<input type="submit" value="Log in">
-</form>
-<a href="javascript:connectToRegister()">Get a new NateOn account</a>
+<H3>Login</H3>
+<a href="LogoutServlet">Logout</a>
 </body>
 </html>

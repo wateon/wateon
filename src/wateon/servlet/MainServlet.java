@@ -7,31 +7,27 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import wateon.WateOn;
-import kfmes.natelib.*;
-
+import wateon.WateOnUser;
 
 /**
- * Servlet implementation class LoginServlet
+ * Servlet implementation class MainServlet
  */
-public class LoginServlet extends HttpServlet {
+public class MainServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LoginServlet() {
+    public MainServlet() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		call(request, response);
 	}
 
@@ -43,20 +39,18 @@ public class LoginServlet extends HttpServlet {
 	}
 
 	private void call(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String id = request.getParameter("id");
-		String password = request.getParameter("password");
-
-		WateOn wateOn = WateOn.getInstance();
-		HttpSession session = request.getSession(true);
-
-		if (wateOn.login(id, password, session)) {
-			String url = "MainServlet";
-			response.sendRedirect(url);
-		} else {
-			String url = "/index.jsp";
+		String id = (String)request.getSession(true).getAttribute("id");
+		WateOnUser user = WateOn.getInstance().getWateOnUser(id);
+		
+		if (user != null && user.isLogged()) {
+			// TODO: 리스트를 보여준다.
+			String url = "/view/main.jsp";
 			RequestDispatcher dispatcher = request.getRequestDispatcher(url);
 			dispatcher.forward(request, response);
-			response.sendRedirect("/");
+		}
+		else {
+			response.sendRedirect("view/login_form.jsp");
 		}
 	}
+
 }
