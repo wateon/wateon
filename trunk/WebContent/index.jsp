@@ -4,7 +4,7 @@
 <head>
 <script language="javascript" type="text/javascript">
 function openWateOn() {
-	window.open("./view/main.jsp",'WateOn', 'top=100, left=700 width=300, height=500, scrollbar=yes');
+	window.open("./view/login_form.jsp",'WateOn', 'top=100, left=700 width=300, height=500, scrollbar=yes');
 }
 </script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
