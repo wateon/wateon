@@ -50,12 +50,9 @@ public class LoginServlet extends HttpServlet {
 		HttpSession session = request.getSession(true);
 
 		if (wateOn.login(id, password, session)) {
-			String url = "MainServlet";
+			String url = "main.do";
 			response.sendRedirect(url);
 		} else {
-			String url = "/index.jsp";
-			RequestDispatcher dispatcher = request.getRequestDispatcher(url);
-			dispatcher.forward(request, response);
 			response.sendRedirect("/");
 		}
 	}

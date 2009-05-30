@@ -11,12 +11,12 @@ function connectToRegister() {
 }
 
 </script>
-<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>WateOn</title>
 </head>
 <body>
 <H3>WateOn</H3>
-<form name="Login" action="../LoginServlet" method="post">
+<form name="Login" action="../login.do" method="post">
 <input type="text" size="30" name="id" value="wateon@nate.com" onfocus="deleteValue('id')"><br>
 <input type="password" size="33" name="password" value="dnpdlxmdhs" onfocus="deleteValue('password')"><br>
 <input type="hidden" name="action" value="login">
