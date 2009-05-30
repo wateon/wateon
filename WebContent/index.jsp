@@ -8,17 +8,16 @@ function openWateOn() {
 }
 </script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Project WateOn</title>
+<title>WateOn</title>
 
 </head>
 
 
-<body onload="openWateOn()">
-subject : Advanced Web Programming Design and Practice<br>
-<H1>WateOn Project</H1><Br>
-What is the WateOn?<br>
-WateOn is the NateOn that is serviced in SK using web browser.<br>
+<body>
+<p>subject : Advanced Web Programming Design and Practice (SoongSil Univ.)</p>
+<H1>WateOn</H1>
+<p>WateOn is the NateOn that is serviced in SK using web browser.</p>
 
-<a href="javascript:openWateOn()">open</a>
+<a href="javascript:openWateOn()">Run WateOn Client</a>
 </body>
 </html>
