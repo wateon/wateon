@@ -10,12 +10,12 @@
 function hello() {
 }
 </script>
-<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>WateOn</title>
 </head>
 <body>
 <H3>Login</H3>
-<a href="LogoutServlet">Logout</a>
+<a href="logout.do">Logout</a>
 
 <br />
 <br />

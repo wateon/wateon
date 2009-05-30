@@ -51,7 +51,7 @@
         <war destfile="build/wateon.war" webxml="WebContent/WEB-INF/web.xml">
             <fileset dir="WebContent"/>
         	<lib dir="lib"/>
-        	<classes dir="build/classes"/>
+        	<classes dir="classes"/>
         </war>
     </target>
     <target name="build-subprojects"/>
