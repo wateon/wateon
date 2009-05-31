@@ -45,15 +45,14 @@ public class LoginServlet extends HttpServlet {
 	private void call(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String id = request.getParameter("id");
 		String password = request.getParameter("password");
-
+		
 		WateOn wateOn = WateOn.getInstance();
 		HttpSession session = request.getSession(true);
-
+		
 		if (wateOn.login(id, password, session)) {
-			String url = "main.do";
-			response.sendRedirect(url);
+			response.sendRedirect("main.do");
 		} else {
-			response.sendRedirect("/");
+			response.sendRedirect("");
 		}
 	}
 }

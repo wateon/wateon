@@ -24,6 +24,9 @@ public class WateOn {
 	}
 	
 	public boolean login(String id, String password, HttpSession session) {
+		if (id == null || password == null)
+			return false;
+		
 		NateonMessenger nateOn = new NateonMessenger();
 		nateOn.login(id, password);
 		

@@ -6,6 +6,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<script language="javascript" type="text/javascript" src="js/jquery-1.3.2.min.js"></script>
 <script language="javascript" type="text/javascript">
 function hello() {
 }
@@ -24,9 +25,9 @@ function hello() {
 	for (NateGroup group : groups) {
 		out.println(group.getName() + "<ul>");
 		for (NateFriend user : group.getList()) {
-%>
-			<li><%= user.getNameNick() %></li>
-<%
+			out.println("<li>");
+			out.println(user.getNickName());
+			out.println("</li>");
 		}
 		out.println("</ul>");
 	}
