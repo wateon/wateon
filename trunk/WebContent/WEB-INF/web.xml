@@ -109,4 +109,14 @@
     <servlet-name>checkStatus.do</servlet-name>
     <url-pattern>/checkStatus.do</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>chat.do</display-name>
+    <servlet-name>chat.do</servlet-name>
+    <servlet-class>wateon.servlet.ChatServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>chat.do</servlet-name>
+    <url-pattern>/chat.do</url-pattern>
+  </servlet-mapping>
 </web-app>
