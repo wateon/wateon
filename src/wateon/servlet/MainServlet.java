@@ -47,12 +47,14 @@ public class MainServlet extends HttpServlet {
 		WateOnUser user = WateOn.getInstance().getWateOnUser(id);
 		
 		if (user != null && user.isLogged()) {
-			// TODO: 리스트를 보여준다.
+			// 리스트를 보여준다.
 			String url = "/view/main.jsp";
 			
 			// FIXME: 나중에 친구의 다른 정보도 포함해서 돌려주자.
 			GroupList groups = user.getNateonMessenger().getBuddyGroup();
 			request.setAttribute("groups", groups.getList());
+			
+			request.setAttribute("myself", user.getNateonMessenger().getOwner());
 			
 			RequestDispatcher dispatcher = request.getRequestDispatcher(url);
 			dispatcher.forward(request, response);

@@ -3,6 +3,7 @@ package wateon;
 import java.util.ArrayList;
 import java.util.Properties;
 
+import kfmes.natelib.NateonMessenger;
 import kfmes.natelib.SwitchBoardSession;
 import kfmes.natelib.entity.GroupList;
 import kfmes.natelib.entity.NateFile;
@@ -14,11 +15,12 @@ import kfmes.natelib.msg.InstanceMessage;
 import kfmes.natelib.msg.MimeMessage;
 
 public class WateOnListener implements NateListener {
+	private WateOnUser wateOnUser;
 
-	public WateOnListener() {
-		// TODO:
+	public WateOnListener(WateOnUser wateOnUser) {
+		this.wateOnUser = wateOnUser;
 	}
-	
+
 	@Override
 	public void OwnerStatusUpdated() {
 		// TODO Auto-generated method stub
