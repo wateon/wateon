@@ -6,7 +6,12 @@
 <title>WateOn</title>
 <script language="javascript" type="text/javascript">
 function openWateOn() {
-	window.open("./view/login_form.jsp",'WateOn', 'top=100, left=700 width=300, height=500, scrollbar=yes');
+	var width = 300;
+	var height = 500;
+	var left = (screen.width) ? (screen.width - width) / 2 : 0;
+	var top = (screen.height) ? (screen.height - height) / 2 : 0;
+	var settings = 'top=' + top + ', left=' + left + ', width=' + width + ', height=' + height + ', scrollbar=yes';
+	window.open('./view/login_form.jsp', 'WateOn', settings);
 }
 </script>
 </head>

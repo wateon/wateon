@@ -1,28 +1,21 @@
 package wateon.servlet;
 
 import java.io.IOException;
-
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
-import wateon.WateOn;
-import kfmes.natelib.*;
-
 
 /**
- * Servlet implementation class LoginServlet
+ * Servlet implementation class CheckWateOnStatusServlet
  */
-public class LoginServlet extends HttpServlet {
+public class CheckWateOnStatusServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LoginServlet() {
+    public CheckWateOnStatusServlet() {
         super();
     }
 
@@ -30,7 +23,6 @@ public class LoginServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		call(request, response);
 	}
 
@@ -41,17 +33,9 @@ public class LoginServlet extends HttpServlet {
 		call(request, response);
 	}
 
-	private void call(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String id = request.getParameter("id");
-		String password = request.getParameter("password");
+	private void call(HttpServletRequest request, HttpServletResponse response) {
+		// TODO Auto-generated method stub
 		
-		WateOn wateOn = WateOn.getInstance();
-		HttpSession session = request.getSession(true);
-		
-		if (wateOn.login(id, password, session)) {
-			response.sendRedirect("main.do");
-		} else {
-			response.sendRedirect("");
-		}
 	}
+
 }
