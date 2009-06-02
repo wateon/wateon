@@ -56,17 +56,16 @@ public class ChatServlet extends HttpServlet {
 			NateonMessenger nate = myself.getNateonMessenger();
 			SwitchBoardSession chatSession = nate.getNS().procOpenChat(id, targetId);
 			
-			System.err.println("id          : " + id);
-			System.err.println("target      : " + targetId);
-			
-			System.err.println("count       : " + chatSession.getFriendCount());
-			System.err.println("connected   : " + chatSession.isConnected());
+			if (chatSession == null) {
+				response.getWriter().println("chatSession is null -_-");
+				return;
+			}
 			
 			// 채팅방을 현재 아이디의 목록에 추가해준다.
 			long sessionNo = myself.addChatSession(chatSession);
 			
 			// 채팅방세션 번호를 넣는다. (유저마다 별개이다.)
-			request.setAttribute("chatSession", sessionNo);
+			request.setAttribute("chatSessionNo", sessionNo);
 			
 			// view/chat.jsp 를 보여준다.
 			String url = "/view/chat.jsp";

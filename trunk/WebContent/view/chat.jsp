@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
-	long chatSession = (Long)request.getAttribute("chatSession");
+	long chatSessionNo = (Long)request.getAttribute("chatSessionNo");
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -10,6 +10,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<p>채팅방 세션: <%= chatSession %></p>
+	<p>채팅방 세션: <%= chatSessionNo %></p>
 </body>
 </html>
