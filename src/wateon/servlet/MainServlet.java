@@ -17,7 +17,7 @@ import wateon.WateOnUser;
 
 public class MainServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		call(request, response);
 	}
@@ -27,10 +27,13 @@ public class MainServlet extends HttpServlet {
 	}
 
 	private void call(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String id = (String)request.getSession(true).getAttribute("id");
+		request.setCharacterEncoding("UTF-8");
+		response.setCharacterEncoding("UTF-8");
+		
+		String id = (String)request.getSession().getAttribute("id");
 		WateOnUser user = WateOn.getInstance().getWateOnUser(id);
 		
-		if (user != null && user.isLogged()) {
+		if (id != null && user != null && user.isLogged()) {
 			// FIXME: 나중에 친구의 다른 정보도 포함해서 돌려주자.
 			GroupList groups = user.getNateonMessenger().getBuddyGroup();
 			request.setAttribute("groups", groups.getList());
@@ -42,7 +45,7 @@ public class MainServlet extends HttpServlet {
 			dispatcher.forward(request, response);
 		}
 		else {
-			response.sendRedirect("view/login_form.jsp");
+			response.sendRedirect("login.jsp");
 		}
 	}
 

@@ -21,6 +21,9 @@ public class LogoutServlet extends HttpServlet {
 	}
 
 	private void call(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");
+		response.setCharacterEncoding("UTF-8");
+		
 		String id = (String)request.getSession().getAttribute("id");
 		WateOn.getInstance().logout(id);
 		response.sendRedirect("login.jsp");
