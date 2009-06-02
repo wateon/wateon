@@ -13,7 +13,7 @@ import kfmes.natelib.SwitchBoardSession;
 import kfmes.natelib.event.NateListener;
 
 public class WateOnUser {
-	private static int sessionNo = 0;
+	private static int nextSessionNo = 0;
 
 	private NateListener listener;
 
@@ -56,6 +56,10 @@ public class WateOnUser {
 	public void removeChatSession(long sessionNo) {
 		chatSessions.remove(sessionNo);
 	}
+	
+	public boolean hasChatSession(long sessionNo) {
+		return chatSessions.containsKey(sessionNo);
+	}
 
 	public SwitchBoardSession getChatSession(long sessionNo) {
 		return chatSessions.get(sessionNo);
@@ -69,9 +73,8 @@ public class WateOnUser {
 	
 	/**
 	 * 새로운 채팅방의 세션 번호를 가져온다.
-	 * @return
 	 */
 	private synchronized static long nextSessionNo() {
-		return ++sessionNo;
+		return ++nextSessionNo;
 	}
 }
