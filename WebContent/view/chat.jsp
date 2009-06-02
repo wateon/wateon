@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%
-	long chatSessionNo = (Long)request.getAttribute("chatSessionNo");
+	String targetId = (String)request.getAttribute("targetId");
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -9,6 +9,6 @@
 	<title>chat</title>
 </head>
 <body>
-	<p>세션번호 : <%= chatSessionNo %></p>
+	<p>상대방 아이디: <%= targetId %></p>
 </body>
 </html>

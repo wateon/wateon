@@ -119,14 +119,4 @@
     <servlet-name>chat.do</servlet-name>
     <url-pattern>/chat.do</url-pattern>
   </servlet-mapping>
-  <servlet>
-    <description></description>
-    <display-name>createChat.do</display-name>
-    <servlet-name>createChat.do</servlet-name>
-    <servlet-class>wateon.servlet.CreateChatServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>createChat.do</servlet-name>
-    <url-pattern>/createChat.do</url-pattern>
-  </servlet-mapping>
 </web-app>
