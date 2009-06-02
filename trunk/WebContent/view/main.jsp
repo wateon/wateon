@@ -35,7 +35,7 @@ function hello() {
 			if (user.getStatus().equals("F") == false) {
 				out.println("<li>");
 %>
-				<a href="chat.do?targetId=<%=user.getID()%>" target="_blank"><%= user.getNameNick() %></a>
+				<a href="createChat.do?targetId=<%=user.getID()%>" target="_blank"><%= user.getNameNick() %></a>
 <%
 				out.println("</li>");
 			}

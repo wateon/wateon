@@ -13,9 +13,11 @@ import kfmes.natelib.SwitchBoardSession;
 import kfmes.natelib.event.NateListener;
 
 public class WateOnUser {
+	private static int sessionNo = 0;
+
 	private NateListener listener;
 
-	private Map<String, SwitchBoardSession> chatSessions;
+	private Map<Long, SwitchBoardSession> chatSessions;
 
 	private Queue<InstanceMessage> instanceMessageQ;
 	private Queue<Message> messageQ;
@@ -33,7 +35,7 @@ public class WateOnUser {
 		nateOn.addNateListener(listener);
 		
 		// 큐, 맵 생성
-		chatSessions = new HashMap<String, SwitchBoardSession>();
+		chatSessions = new HashMap<Long, SwitchBoardSession>();
 		instanceMessageQ = new LinkedList<InstanceMessage>();
 		messageQ = new LinkedList<Message>();
 		friendStatusQ = new LinkedList<FriendStatus>();
@@ -51,15 +53,25 @@ public class WateOnUser {
 		return nateOn.isLoggedIn();
 	}
 
-	public void removeChatSession(String session) {
-		chatSessions.remove(session);
+	public void removeChatSession(long sessionNo) {
+		chatSessions.remove(sessionNo);
 	}
 
-	public SwitchBoardSession getChatSession(String session) {
-		return chatSessions.get(session);
+	public SwitchBoardSession getChatSession(long sessionNo) {
+		return chatSessions.get(sessionNo);
 	}
 
-	public void addChatSession(String session, SwitchBoardSession aSession) {
+	public long addChatSession(SwitchBoardSession aSession) {
+		long session = nextSessionNo();
 		chatSessions.put(session, aSession);
+		return session;
+	}
+	
+	/**
+	 * 새로운 채팅방의 세션 번호를 가져온다.
+	 * @return
+	 */
+	private synchronized static long nextSessionNo() {
+		return ++sessionNo;
 	}
 }
