@@ -17,13 +17,13 @@ import wateon.WateOnUser;
 /**
  * Servlet implementation class ChatServlet
  */
-public class ChatServlet extends HttpServlet {
+public class CreateChatServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ChatServlet() {
+    public CreateChatServlet() {
         super();
     }
 
@@ -65,13 +65,9 @@ public class ChatServlet extends HttpServlet {
 			// 채팅방을 현재 아이디의 목록에 추가해준다.
 			long sessionNo = myself.addChatSession(chatSession);
 			
-			// 채팅방세션 번호를 넣는다. (유저마다 별개이다.)
-			request.setAttribute("chatSession", sessionNo);
-			
-			// view/chat.jsp 를 보여준다.
-			String url = "/view/chat.jsp";
-			RequestDispatcher dispatcher  = request.getRequestDispatcher(url);
-			dispatcher.forward(request, response);
+			// redirection 해준다.
+			String url = "chat.do?no=" + sessionNo;
+			response.sendRedirect(url);
 		}
 	}
 }

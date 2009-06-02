@@ -49,6 +49,9 @@ public class WateOn {
 			return false;
 		
 		else {
+			// TODO: 채팅방을 모두 닫아준다.
+			// TODO: 메시지 큐도 모두 제거한다.
+			
 			try {
 				NateonMessenger msger = wateOnUser.getNateonMessenger();
 				if (msger != null && msger.isLoggedIn())
