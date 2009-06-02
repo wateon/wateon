@@ -17,7 +17,10 @@ public class CheckWateOnStatusServlet extends HttpServlet {
 		call(request, response);
 	}
 
-	private void call(HttpServletRequest request, HttpServletResponse response) {
+	private void call(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");
+		response.setCharacterEncoding("UTF-8");
+		
 		// TODO Auto-generated method stub
 		
 	}

@@ -24,6 +24,9 @@ public class ChatServlet extends HttpServlet {
 	}
 
 	private void call(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+		request.setCharacterEncoding("UTF-8");
+		response.setCharacterEncoding("UTF-8");
+		
 		String id = (String)request.getSession().getAttribute("id");
 		String targetId = (String)request.getParameter("targetId");
 		
@@ -53,7 +56,7 @@ public class ChatServlet extends HttpServlet {
 				}
 				else {
 					// 실패(안 만들어졌음)
-					response.getWriter().println("chatRoom is not created -_-");
+					writer.println("chatRoom is not created -_-");
 					return;
 				}
 			}
@@ -62,16 +65,11 @@ public class ChatServlet extends HttpServlet {
 
 	private void viewChatRoomPage(String targetId, HttpServletRequest request, HttpServletResponse response)
 	throws ServletException, IOException {
-		// view/chat.jsp 를 보여준다.
-		String url = "/view/chat.jsp";
-		request.setCharacterEncoding("UTF-8");
-		response.setCharacterEncoding("UTF-8");
-		response.setContentType("text/html;charset=UTF-8");
-		
-		RequestDispatcher dispatcher  = request.getRequestDispatcher(url);
-		
 		request.setAttribute("targetId", targetId);
 		
+		// view/chat.jsp 를 보여준다.
+		String url = "/view/chat.jsp";
+		RequestDispatcher dispatcher  = request.getRequestDispatcher(url);
 		dispatcher.forward(request, response);
 	}
 	
