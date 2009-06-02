@@ -66,6 +66,7 @@ public class ChatServlet extends HttpServlet {
 		String url = "/view/chat.jsp";
 		request.setCharacterEncoding("UTF-8");
 		response.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html;charset=UTF-8");
 		
 		RequestDispatcher dispatcher  = request.getRequestDispatcher(url);
 		
