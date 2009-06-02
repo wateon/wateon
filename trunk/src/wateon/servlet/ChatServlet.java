@@ -9,27 +9,23 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import kfmes.natelib.NateonMessenger;
-import kfmes.natelib.SwitchBoardSession;
-
 import wateon.WateOn;
 import wateon.WateOnUser;
 
 public class ChatServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		call(request, response);
 	}
-	
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		call(request, response);
 	}
-	
+
 	private void call(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		String id = (String)request.getSession().getAttribute("id");
-		String sessionNoParameter = (String)request.getParameter("no");
-		long sessionNo = Long.parseLong(sessionNoParameter);
+		String targetId = (String)request.getParameter("targetId");
 		
 		WateOnUser user = WateOn.getInstance().getWateOnUser(id);
 		PrintWriter writer = response.getWriter();
@@ -38,23 +34,44 @@ public class ChatServlet extends HttpServlet {
 		if (id == null || user == null || user.isLogged() == false)
 			writer.println("need login");
 		
-		// 방 번호를 매개변수로 받았는지 확인한다.
-		else if (sessionNoParameter == null)
-			writer.println("need chatSessionNo");
+		// 상대방 아이디가 있는지 확인한다.
+		else if (targetId == null || targetId.equals(""))
+			writer.println("need login");
 		
-		// 해당 방이 아직 열려있는지 확인한다.
-		else if (user.hasChatSession(sessionNo) == false)
-			writer.println("the chat room was closed");
-		
-		// 모두 통과되면, 채팅방을 보여준다.
 		else {
-			// 채팅방세션 번호를 넣는다. (유저마다 별개이다.)
-			request.setAttribute("chatSessionNo", sessionNo);
+			WateOnUser myself = WateOn.getInstance().getWateOnUser(id);
 			
-			// view/chat.jsp 를 보여준다.
-			String url = "/view/chat.jsp";
-			RequestDispatcher dispatcher  = request.getRequestDispatcher(url);
-			dispatcher.forward(request, response);
+			// 이미, 해당 대화상대와 채팅중인지 확인한다.
+			if (myself.hasChatSession(targetId)) {
+				viewChatRoomPage(targetId, request, response);
+			}
+			
+			// 채팅중이 아니었으면, 채팅방 만들기를 시도한다.
+			else {
+				if (myself.createNewChatSession(targetId)) {
+					viewChatRoomPage(targetId, request, response);
+				}
+				else {
+					// 실패(안 만들어졌음)
+					response.getWriter().println("chatRoom is not created -_-");
+					return;
+				}
+			}
 		}
 	}
+
+	private void viewChatRoomPage(String targetId, HttpServletRequest request, HttpServletResponse response)
+	throws ServletException, IOException {
+		// view/chat.jsp 를 보여준다.
+		String url = "/view/chat.jsp";
+		request.setCharacterEncoding("UTF-8");
+		response.setCharacterEncoding("UTF-8");
+		
+		RequestDispatcher dispatcher  = request.getRequestDispatcher(url);
+		
+		request.setAttribute("targetId", targetId);
+		
+		dispatcher.forward(request, response);
+	}
+	
 }

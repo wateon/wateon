@@ -16,7 +16,7 @@ function connectToRegister() {
 </head>
 <body>
 <H3>WateOn</H3>
-<form name="Login" action="../login.do" method="post">
+<form name="Login" action="login.do" method="post">
 <input type="text" size="30" name="id" value="wateon@nate.com" onfocus="deleteValue('id')"><br>
 <input type="password" size="33" name="password" value="dnpdlxmdhs" onfocus="deleteValue('password')"><br>
 <input type="hidden" name="action" value="login">

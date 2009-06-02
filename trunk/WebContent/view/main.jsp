@@ -10,10 +10,7 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>WateOn</title>
 	<script language="javascript" type="text/javascript" src="js/jquery-1.3.2.min.js"></script>
-	<script language="javascript" type="text/javascript">
-	function hello() {
-	}
-	</script>
+	<script language="javascript" type="text/javascript" src="js/wateon.js"></script>
 </head>
 <body>
 	<h3>Login</h3>
@@ -35,7 +32,7 @@
 			if (user.getStatus().equals("F") == false) {
 				out.println("<li>");
 %>
-					<a href="createChat.do?targetId=<%=user.getID()%>" target="_blank"><%= user.getNameNick() %></a>
+					<a href="chat.do?targetId=<%=user.getID()%>" target="_blank"><%= user.getNameNick() %></a>
 <%
 				out.println("</li>");
 			}
