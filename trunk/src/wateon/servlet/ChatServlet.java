@@ -1,6 +1,7 @@
 package wateon.servlet;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -14,56 +15,39 @@ import kfmes.natelib.SwitchBoardSession;
 import wateon.WateOn;
 import wateon.WateOnUser;
 
-/**
- * Servlet implementation class ChatServlet
- */
 public class ChatServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public ChatServlet() {
-        super();
-    }
-
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
+	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		call(request, response);
 	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		call(request, response);
 	}
-
+	
 	private void call(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-		String targetId = (String)request.getParameter("targetId");
 		String id = (String)request.getSession().getAttribute("id");
+		String sessionNoParameter = (String)request.getParameter("no");
+		long sessionNo = Long.parseLong(sessionNoParameter);
 		
-		// 내 아이디랑, 상대방 아이디가 있는지 확인한다.
-		if (targetId == null || targetId.equals("") || id == null) {
-			response.getWriter().println("need login");
-		}
+		WateOnUser user = WateOn.getInstance().getWateOnUser(id);
+		PrintWriter writer = response.getWriter();
 		
+		// 내 아이디가 있는지, 로그인 된 상태인지 확인한다.
+		if (id == null || user == null || user.isLogged() == false)
+			writer.println("need login");
+		
+		// 방 번호를 매개변수로 받았는지 확인한다.
+		else if (sessionNoParameter == null)
+			writer.println("need chatSessionNo");
+		
+		// 해당 방이 아직 열려있는지 확인한다.
+		else if (user.hasChatSession(sessionNo) == false)
+			writer.println("the chat room was closed");
+		
+		// 모두 통과되면, 채팅방을 보여준다.
 		else {
-			// 상대방 아이디를 이용해서, 채팅방을 만들어주고,
-			WateOnUser myself = WateOn.getInstance().getWateOnUser(id);
-			NateonMessenger nate = myself.getNateonMessenger();
-			SwitchBoardSession chatSession = nate.getNS().procOpenChat(id, targetId);
-			
-			if (chatSession == null) {
-				response.getWriter().println("chatSession is null -_-");
-				return;
-			}
-			
-			// 채팅방을 현재 아이디의 목록에 추가해준다.
-			long sessionNo = myself.addChatSession(chatSession);
-			
 			// 채팅방세션 번호를 넣는다. (유저마다 별개이다.)
 			request.setAttribute("chatSessionNo", sessionNo);
 			
