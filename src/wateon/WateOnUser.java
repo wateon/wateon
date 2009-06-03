@@ -5,6 +5,7 @@ import java.util.LinkedList;
 import java.util.Map;
 import java.util.Queue;
 
+import wateon.entity.ChatRoom;
 import wateon.entity.FriendStatus;
 import wateon.entity.InstanceMessage;
 import wateon.entity.Message;
@@ -17,10 +18,9 @@ public class WateOnUser {
 
 	private NateListener listener;
 
-	private Map<String, SwitchBoardSession> chatSessions;
+	private Map<String, ChatRoom> chatRooms;
 
 	private Queue<InstanceMessage> instanceMessageQ;
-	private Queue<Message> messageQ;
 	private Queue<FriendStatus> friendStatusQ;
 
 	private String id;
@@ -40,9 +40,8 @@ public class WateOnUser {
 		nateOn.addNateListener(listener);
 		
 		// 큐, 맵 생성
-		chatSessions = new HashMap<String, SwitchBoardSession>();
+		chatRooms = new HashMap<String, ChatRoom>();
 		instanceMessageQ = new LinkedList<InstanceMessage>();
-		messageQ = new LinkedList<Message>();
 		friendStatusQ = new LinkedList<FriendStatus>();
 	}
 	
@@ -74,12 +73,12 @@ public class WateOnUser {
 	 * 해당 대화상대와의 채팅방을 닫는다.
 	 * @param targetId 대화상대 아이디
 	 */
-	public void closeChatSession(String targetId) {
+	public void closeChatRoom(String targetId) {
 		if (hasChatSession(targetId) == false)
 			return;
 		
-		getChatSession(targetId).close();
-		chatSessions.remove(targetId);
+		getChatRoom(targetId).close();
+		chatRooms.remove(targetId);
 	}
 
 	/**
@@ -88,7 +87,7 @@ public class WateOnUser {
 	 * @return 채팅방이 열려있는지 여부
 	 */
 	public boolean hasChatSession(String targetId) {
-		return chatSessions.containsKey(targetId);
+		return chatRooms.containsKey(targetId);
 	}
 
 	/**
@@ -96,8 +95,8 @@ public class WateOnUser {
 	 * @param targetId 대화상대 아이디
 	 * @return 채팅방 인스턴스
 	 */
-	public SwitchBoardSession getChatSession(String targetId) {
-		return chatSessions.get(targetId);
+	public ChatRoom getChatRoom(String targetId) {
+		return chatRooms.get(targetId);
 	}
 
 	/**
@@ -118,16 +117,7 @@ public class WateOnUser {
 			return false;
 		
 		// 생성된 채팅방 인스턴스를 목록에 추가한다.
-		addChatSession(targetId, chatSession);
+		chatRooms.put(targetId, new ChatRoom(targetId, chatSession));
 		return true;
-	}
-
-	/**
-	 * 새로운 채팅방 세션을 생성한다.
-	 * @param targetId
-	 * @param chatRoom
-	 */
-	private void addChatSession(String targetId, SwitchBoardSession aSession) {
-		chatSessions.put(targetId, aSession);
 	}
 }
