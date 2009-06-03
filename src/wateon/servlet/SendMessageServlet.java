@@ -21,6 +21,12 @@ public class SendMessageServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		response.setCharacterEncoding("UTF-8");
 		
+		
+		String message = request.getParameter("message");
+
+		System.out.println(message);
+		
+		
 		// TODO Auto-generated method stub
 		
 	}
