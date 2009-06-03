@@ -3,6 +3,9 @@ package wateon;
 import java.util.ArrayList;
 import java.util.Properties;
 
+import wateon.entity.ChatRoom;
+import wateon.entity.Message;
+
 import kfmes.natelib.NateonMessenger;
 import kfmes.natelib.SwitchBoardSession;
 import kfmes.natelib.entity.GroupList;
@@ -15,10 +18,10 @@ import kfmes.natelib.msg.InstanceMessage;
 import kfmes.natelib.msg.MimeMessage;
 
 public class WateOnListener implements NateListener {
-	private WateOnUser wateOnUser;
+	private WateOnUser self;
 
 	public WateOnListener(WateOnUser wateOnUser) {
-		this.wateOnUser = wateOnUser;
+		this.self = wateOnUser;
 	}
 
 	@Override
@@ -58,10 +61,13 @@ public class WateOnListener implements NateListener {
 	}
 
 	@Override
-	public void chatMessageReceived(SwitchBoardSession arg0, NateFriend arg1,
-			MimeMessage arg2) {
-		// TODO Auto-generated method stub
-
+	public void chatMessageReceived(SwitchBoardSession session,
+			NateFriend other, MimeMessage msg) {
+		
+		// 어느 채팅방인지 찾아낸다.
+		ChatRoom room = self.getChatRoom(other.getID());
+		// 메시지 목록에 추가해준다.
+		room.addNewMessage(new Message(other.getID(), other.getNickName(), msg.getMessage()));
 	}
 
 	@Override

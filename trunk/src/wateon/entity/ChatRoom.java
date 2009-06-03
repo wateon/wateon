@@ -50,4 +50,8 @@ public class ChatRoom {
 		receivedMessageQ = new LinkedList<Message>();
 		return queue;
 	}
+
+	public boolean sendMessage(String message) {
+		return session.sendMessage(message);
+	}
 }
