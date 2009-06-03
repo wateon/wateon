@@ -30,35 +30,32 @@ public class ChatServlet extends HttpServlet {
 		String id = (String)request.getSession().getAttribute("id");
 		String targetId = (String)request.getParameter("targetId");
 		
-		WateOnUser user = WateOn.getInstance().getWateOnUser(id);
+		WateOnUser myself = WateOn.getInstance().getWateOnUser(id);
 		PrintWriter writer = response.getWriter();
 		
 		// 내 아이디가 있는지, 로그인 된 상태인지 확인한다.
-		if (id == null || user == null || user.isLogged() == false)
+		if (id == null || myself == null || myself.isLogged() == false)
 			writer.println("need login");
 		
 		// 상대방 아이디가 있는지 확인한다.
 		else if (targetId == null || targetId.equals(""))
-			writer.println("need login");
+			writer.println("need target id");
 		
 		else {
-			WateOnUser myself = WateOn.getInstance().getWateOnUser(id);
-			
 			// 이미, 해당 대화상대와 채팅중인지 확인한다.
 			if (myself.hasChatSession(targetId)) {
 				viewChatRoomPage(targetId, request, response);
 			}
 			
 			// 채팅중이 아니었으면, 채팅방 만들기를 시도한다.
+			else if (myself.createNewChatSession(targetId)) {
+				viewChatRoomPage(targetId, request, response);
+			}
+			
+			// 실패(안 만들어졌음)
 			else {
-				if (myself.createNewChatSession(targetId)) {
-					viewChatRoomPage(targetId, request, response);
-				}
-				else {
-					// 실패(안 만들어졌음)
-					writer.println("chatRoom is not created -_-");
-					return;
-				}
+				writer.println("chatRoom is not created -_-");
+				return;
 			}
 		}
 	}
