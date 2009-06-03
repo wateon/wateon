@@ -15,15 +15,27 @@
 	<script language="javascript" type="text/javascript">
 		$(document).ready(function() {
 			startCheckMessageThread("<%= targetId %>");
+			$('#send_msg').ajaxForm({
+				target: 'send_result',
+				dataType: 'json',
+				beforeSubmit: beforeSendMessage,
+				success: successedSendMessage
+			});
 		});
 	</script>
 </head>
 <body>
 	<p>상대방 아이디: <%= targetId %></p>
-	<div id="chat_list">
-	</div>
+	<div id="chat_list"></div>
 
-	<form method="post" action="">
-	</form>
+	<div id="send_result"></div>
+
+	<div>
+		<form id="send_msg" method="post" action="sendMsg.do">
+			<textarea id="message" name="message"></textarea>
+			<input type="submit" value="보내기" />
+			<input type="hidden" name="targetId" value="<%= targetId %>" />
+		</form>
+	</div>
 </body>
 </html>

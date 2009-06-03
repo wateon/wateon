@@ -2,6 +2,8 @@ package wateon.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
+import java.util.Queue;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -10,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import wateon.WateOn;
 import wateon.WateOnUser;
+import wateon.entity.Message;
 
 public class CheckMessageServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -55,7 +58,27 @@ public class CheckMessageServlet extends HttpServlet {
 			// ]
 			
 			// FIXME: ajax 테스트임.
-			json = ".";
+			Queue<Message> msgs = myself.getChatRoom(targetId).getAllMessages();
+			
+			String messages = "[\n";
+			int size = msgs.size();
+			for (Message msg : msgs) {
+				messages += "{";
+				messages += "id: '" + msg.getId() + "', ";
+				messages += "nick: '" + msg.getNick() + "', ";
+				messages += "msg: '" + msg.getMessage() + "' ";
+				messages += "}";
+				
+				if (size > 0)
+					messages += ",";
+				
+				messages += "\n";
+				size--;
+			}
+			
+			messages += "]\n";
+			
+			json = "{ result: 'success', messages: " + messages + " }";
 			
 			writer.println(json);
 		}
