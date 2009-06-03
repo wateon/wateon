@@ -43,7 +43,7 @@
     <description></description>
     <display-name>sendIMsg.do</display-name>
     <servlet-name>sendIMsg.do</servlet-name>
-    <servlet-class>SendInstanceMessageServlet</servlet-class>
+    <servlet-class>wateon.servlet.SendInstanceMessageServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>sendIMsg.do</servlet-name>
