@@ -28,8 +28,8 @@ public class SendInstanceMessageServlet extends HttpServlet {
 	}
 
 	private void call(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("euc-kr");
-		response.setCharacterEncoding("euc-kr");
+		request.setCharacterEncoding("UTF-8");
+		response.setCharacterEncoding("UTF-8");
 		
 		// TODO Auto-generated method stub
 		
@@ -37,10 +37,12 @@ public class SendInstanceMessageServlet extends HttpServlet {
 		String senderId = request.getParameter("senderId");
 		String message = request.getParameter("message");
 		WateOnUser myself = WateOn.getInstance().getWateOnUser(senderId);
+		
+		
 		InstanceMessage msg = new InstanceMessage(senderId, targetId, message);
 		myself.getNateonMessenger().sendIMessage(msg);
 
-		String url = "/view/close.jsp";
+		String url = "view/close.jsp";
 		response.sendRedirect(url);
 	}
 }

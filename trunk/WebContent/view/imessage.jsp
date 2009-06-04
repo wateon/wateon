@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="kfmes.natelib.entity.*, java.util.List" %>
 <%
 	String targetId = request.getParameter("targetId");
@@ -7,7 +7,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Instance Message</title>
 </head>
 
@@ -16,7 +16,7 @@
 		<input type='text' name='targetId' readonly='readonly' value='<%= targetId %>' /><br />
 		<input type='text' name='senderId' readonly='readonly' value='<%= senderId %>' /><br />
 		<textarea name='message' cols='50' rows='10'></textarea><br />
-		<input type='submit' name='submit' value='보내기'>
+		<input type='submit' name='submit' value='蹂대궡湲�'>
 	</form>
 </body>
 </html>
