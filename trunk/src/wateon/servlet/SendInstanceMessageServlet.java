@@ -2,7 +2,6 @@ package wateon.servlet;
 
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -12,8 +11,6 @@ import javax.servlet.http.HttpServletResponse;
 import wateon.WateOn;
 import wateon.WateOnUser;
 
-import kfmes.natelib.NateonMessenger;
-import kfmes.natelib.entity.NateFriend;
 import kfmes.natelib.msg.InstanceMessage;
 
 public class SendInstanceMessageServlet extends HttpServlet {
@@ -31,18 +28,12 @@ public class SendInstanceMessageServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		response.setCharacterEncoding("UTF-8");
 		
-		// TODO Auto-generated method stub
-		
 		String targetId = request.getParameter("targetId");
 		String senderId = request.getParameter("senderId");
 		String message = request.getParameter("message");
 		WateOnUser myself = WateOn.getInstance().getWateOnUser(senderId);
 		
-		
 		InstanceMessage msg = new InstanceMessage(senderId, targetId, message);
 		myself.getNateonMessenger().sendIMessage(msg);
-
-		String url = "view/close.jsp";
-		response.sendRedirect(url);
 	}
 }

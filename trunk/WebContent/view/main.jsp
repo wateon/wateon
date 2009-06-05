@@ -32,10 +32,9 @@
 			if (user.getStatus().equals("F") == false) {
 				out.println("<li>");
 %>
-
 					<a href="chat.do?targetId=<%=user.getID()%>" target="_blank"><%= user.getNameNick() %></a>
-					<a href="./view/imessage.jsp?targetId=<%=user.getID() %>" target="_blank">(message)</a>
-					
+					<a href="./view/imessage.jsp"
+					onclick="javascript:popUpCenter('./view/imessage.jsp?targetId=<%=user.getID() %>', '쪽지', 500, 255); return false;">(message)</a>
 <%
 				out.println("</li>");
 			}
