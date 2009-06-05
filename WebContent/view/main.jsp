@@ -10,6 +10,7 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>WateOn</title>
 	<script language="javascript" type="text/javascript" src="js/jquery-1.3.2.min.js"></script>
+	<script language="javascript" type="text/javascript" src="js/group.js"></script>
 	<script language="javascript" type="text/javascript" src="js/wateon.js"></script>
 </head>
 <body>
@@ -21,13 +22,17 @@
 		<li>닉네임: <%= myself.getNickName() %></li>
 		<li>상태: <%= myself.getFormattedStatus() %></li>
 	</ul>
+	<br />
+	<input type="button" onclick="createGroup()" value="그룹 추가">
 	
 	<br />
 	<br />
 	
 <%
 	for (NateGroup group : groups) {
-		out.println(group.getName() + "<ul>");
+		String groupName = group.getName();
+		out.println(groupName + " <input type='button' onclick='deleteGroup(\"" + groupName + "\")' value='삭제'>" + 
+				" <input type='button' onclick='modifyGroup(\"" + groupName + "\")' value='변경'>" + "<ul>");
 		for (NateFriend user : group.getList()) {
 			if (user.getStatus().equals("F") == false) {
 				out.println("<li>");
@@ -37,7 +42,7 @@
 					<%= user.getNameNick() %>
 					</a>
 					<a href="imessage.jsp"
-					onclick="javascript:popUpCenter('imessage.jsp?targetId=<%=user.getID() %>', '쪽지', 500, 255); return false;">(message)</a>
+					onclick="javascript:popUpCenter('imessage.jsp?targetId=<%=user.getID() %>', '쪽지', 500, 255); return false;"><쪽지></a>
 <%
 				out.println("</li>");
 			}
