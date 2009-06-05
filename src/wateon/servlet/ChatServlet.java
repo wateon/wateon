@@ -28,7 +28,9 @@ public class ChatServlet extends HttpServlet {
 		response.setCharacterEncoding("UTF-8");
 		
 		String id = (String)request.getSession().getAttribute("id");
-		String targetId = (String)request.getParameter("targetId");
+		String targetId = request.getParameter("targetId");
+		
+		String action = request.getParameter("action");
 		
 		WateOnUser myself = WateOn.getInstance().getWateOnUser(id);
 		PrintWriter writer = response.getWriter();
@@ -41,22 +43,26 @@ public class ChatServlet extends HttpServlet {
 		else if (targetId == null || targetId.equals(""))
 			writer.println("need target id");
 		
+		// 이미, 해당 대화상대와 채팅중인지 확인한다.
+		else if (myself.hasChatSession(targetId))
+			viewChatRoomPage(targetId, request, response);
+		
+		/*
+		// 채팅창을 닫아달라는 요청인지 확인한다.
+		else if (action != null && action.equals("close")) {
+			myself.getChatRoom(targetId).close();
+			writer.println("");
+		}
+		*/
+		
+		// 채팅중이 아니었으면, 채팅방 만들기를 시도한다.
+		else if (myself.createNewChatSession(targetId))
+			viewChatRoomPage(targetId, request, response);
+		
+		// 실패(안 만들어졌음)
 		else {
-			// 이미, 해당 대화상대와 채팅중인지 확인한다.
-			if (myself.hasChatSession(targetId)) {
-				viewChatRoomPage(targetId, request, response);
-			}
-			
-			// 채팅중이 아니었으면, 채팅방 만들기를 시도한다.
-			else if (myself.createNewChatSession(targetId)) {
-				viewChatRoomPage(targetId, request, response);
-			}
-			
-			// 실패(안 만들어졌음)
-			else {
-				writer.println("chatRoom is not created -_-");
-				return;
-			}
+			writer.println("chatRoom is not created -_-");
+			return;
 		}
 	}
 
