@@ -1,5 +1,13 @@
 // 주의: 이 파일을 포함하기 전에, jquery와 jquery.async.js 가 포함되어 있어야 함!!
 
+function scrollDown() {
+	window.scrollBy(0, window.outerHeight);
+}
+
+function message(id, nick, msg, type) {
+	return '<p class="msg ' + type + '">' + nick + '<br />' + msg + '</p>';
+}
+
 function startCheckMessageThread(targetId) {
 	var chatList = $('#chat_list');
 	chatList.empty();
@@ -21,10 +29,8 @@ function startCheckMessageThread(targetId) {
 						var nick = msgs[i].nick;
 						var msg = msgs[i].msg;
 						
-						var to_append_str = '<p>' + nick + ' : ' + msg + '</p>';
-						
-						chatList.html(chatList.html() + to_append_str);
-						window.scrollBy(0, window.outerHeight);
+						chatList.append(message(id, nick, msg, "receive"));
+						scrollDown();
 					}
 				}
 			});
@@ -37,12 +43,19 @@ function beforeSendMessage(data, option) {
 }
 
 function successedSendMessage(json, state) {
-	//alert(result.msg);
-	var msg = '';
-	var chatList = $('#chat_list');
-	
 	if (json.result == 'success') {
-		msg = json.msg;
-		chatList.html(chatList.html() + '<p size="15">' + msg + '</p>');
+		var chatList = $('#chat_list');
+		var html = message(json.id, json.nick, json.msg, "send");
+		chatList.append(html);
+		scrollDown();
 	}
+}
+
+function chatWindowClose() {
+	var url = encodeURI('chat.do');
+	$.getJSON(url, {"targetId": "'" + targetId + "'", "action": "close"}, function(json, state) {
+		if (state == 'success') {
+			$(window).close();
+		}
+	});
 }

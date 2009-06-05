@@ -47,16 +47,16 @@ public class SendMessageServlet extends HttpServlet {
 			writer.println("{ result: 'fail', msg: '메시지 내용이 없습니다.' }");
 		
 		// 해당 상대랑 대화하는 채팅방이 없음.
-		else if (myself.hasChatSession(targetId) == false) {
+		else if (myself.hasChatSession(targetId) == false)
 			writer.println("{ result: 'fail', msg: 'not exist chat room' }");
-		}
 		
 		// 성공
 		else {
 			ChatRoom room = myself.getChatRoom(targetId);
 			if (room.sendMessage(message)) {
 				// TODO: message 에 URL encoding 이 필요함!!!
-				String json = "{ result: 'success', msg: '" + message + "' }";
+				String nick = myself.getNateonMessenger().getOwner().getNickName();
+				String json = "{ result: 'success', id: '" + id + "', nick: '" + nick + "', msg: '" + message + "' }";
 				writer.println(json);
 			}
 			else {

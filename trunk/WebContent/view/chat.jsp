@@ -6,7 +6,8 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>chat</title>
+	<title>채팅: <%= targetId %></title>
+	<link rel="stylesheet" href="css/chat.css" type="text/css" media="screen" />
 	<script language="javascript" type="text/javascript" src="js/jquery-1.3.2.min.js"></script>
 	<script language="javascript" type="text/javascript" src="js/jquery.async.js"></script>
 	<script language="javascript" type="text/javascript" src="js/jquery.form.js"></script>
@@ -15,8 +16,8 @@
 	<script language="javascript" type="text/javascript">
 		$(document).ready(function() {
 			startCheckMessageThread("<%= targetId %>");
+			//$(window).unload(chatWindowClose);
 			$('#send_msg').ajaxForm({
-				target: 'send_result',
 				dataType: 'json',
 				beforeSubmit: beforeSendMessage,
 				success: successedSendMessage
@@ -25,11 +26,9 @@
 	</script>
 </head>
 <body>
-	<p>상대방 아이디: <%= targetId %></p>
-	<div id="chat_list"></div>
-
-	<div id="send_result"></div>
-
+	<div id="chat_list">
+	</div>
+	
 	<div>
 		<form id="send_msg" method="post" action="sendMsg.do">
 			<textarea id="message" name="message"></textarea>

@@ -1,0 +1,13 @@
+@CHARSET "UTF-8";
+
+.msg {
+	font-size: 12px;
+}
+
+.send {
+	font-weight: bold;
+	background: #28f08c;
+}
+
+.receive {
+}

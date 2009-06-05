@@ -11,8 +11,8 @@
 	<h1>WateOn</h1>
 	<p>WateOn is the NateOn that is serviced in SK using web browser.</p>
 	
-	<a href="./login.jsp"
-	onclick="javascript:popUpCenter('./login.jsp', 'WateOn', 300, 500); return false;">
+	<a href="login.jsp"
+	onclick="javascript:popUpCenter('login.jsp', 'WateOn', 300, 500); return false;">
 	Run WateOn Client
 	</a>
 </body>
