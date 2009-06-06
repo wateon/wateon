@@ -17,11 +17,26 @@ function connectToRegister() {
 <body>
 <H3>WateOn</H3>
 <form name="Login" action="login.do" method="post">
-<input type="text" size="30" name="id" value="gsk1047@nate.com" onfocus="deleteValue('id')"><br>
-<input type="password" size="33" name="password" value="tjsrua" onfocus="deleteValue('password')"><br>
-<input type="hidden" name="action" value="login">
-<input type="submit" value="Log in">
-</form>
+<table cellpadding="0" cellspacing="0" border="0">
+	<tr>
+		<td>아이디</td>
+		<td>:&nbsp;<input type="text" size="23" name="id"
+			value="gsk1047@nate.com" onfocus="deleteValue('id')"></td>
+	</tr>
+	<tr>
+		<td>비밀번호</td>
+		<td>:&nbsp;<input type="password" size="25" name="password"
+			value="tjsrua" onfocus="deleteValue('password')"></td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+	</tr>
+	<tr>
+		<td colspan="2" align="center"><input type="submit"
+			value="Log in"></td>
+	</tr>
+</table>
+<input type="hidden" name="action" value="login"></form>
 <a href="javascript:connectToRegister()">Get a new NateOn account</a>
 </body>
 </html>
