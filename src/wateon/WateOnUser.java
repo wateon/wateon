@@ -1,27 +1,26 @@
 package wateon;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 import java.util.Queue;
 
 import wateon.entity.ChatRoom;
 import wateon.entity.FriendStatus;
 import wateon.entity.InstanceMessage;
-import wateon.entity.Message;
 import kfmes.natelib.NateonMessenger;
 import kfmes.natelib.SwitchBoardSession;
 import kfmes.natelib.event.NateListener;
 
 public class WateOnUser {
-	private static int nextSessionNo = 0;
-
 	private NateListener listener;
 
 	private Map<String, ChatRoom> chatRooms;
 
-	private Queue<InstanceMessage> instanceMessageQ;
-	private Queue<FriendStatus> friendStatusQ;
+	private List<InstanceMessage> instanceMessageQ;
+	private List<FriendStatus> friendStatusQ;
 
 	private String id;
 	private NateonMessenger nateOn;
@@ -41,8 +40,8 @@ public class WateOnUser {
 		
 		// 큐, 맵 생성
 		chatRooms = new HashMap<String, ChatRoom>();
-		instanceMessageQ = new LinkedList<InstanceMessage>();
-		friendStatusQ = new LinkedList<FriendStatus>();
+		instanceMessageQ = new ArrayList<InstanceMessage>();
+		friendStatusQ = new ArrayList<FriendStatus>();
 	}
 	
 	/**
@@ -119,5 +118,33 @@ public class WateOnUser {
 		// 생성된 채팅방 인스턴스를 목록에 추가한다.
 		chatRooms.put(targetId, new ChatRoom(targetId, chatSession));
 		return true;
+	}
+
+	public void addInstanceMessage(InstanceMessage imessage) {
+		synchronized (instanceMessageQ) {
+			instanceMessageQ.add(imessage);
+		}
+	}
+	
+	public List<InstanceMessage> getAllInstanceMessages() {
+		synchronized (instanceMessageQ) {
+			List<InstanceMessage> imessages = instanceMessageQ;
+			instanceMessageQ = new ArrayList<InstanceMessage>();
+			return imessages;
+		}
+	}
+
+	public void addFriendStatus(FriendStatus status) {
+		synchronized (friendStatusQ) {
+			friendStatusQ.add(status);
+		}
+	}
+	
+	public List<FriendStatus> getAllFriendStatuses() {
+		synchronized (friendStatusQ) {
+			List<FriendStatus> statuses = friendStatusQ;
+			friendStatusQ = new ArrayList<FriendStatus>();
+			return statuses;
+		}
 	}
 }

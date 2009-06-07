@@ -6,8 +6,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import kfmes.natelib.SwitchBoardSession;
-import kfmes.natelib.entity.FriendList;
 import kfmes.natelib.entity.NateFriend;
 
 import wateon.WateOn;

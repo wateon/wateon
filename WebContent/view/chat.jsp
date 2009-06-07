@@ -14,9 +14,11 @@
 	<script language="javascript" type="text/javascript" src="js/wateon.js"></script>
 	<script language="javascript" type="text/javascript" src="js/chat.js"></script>
 	<script language="javascript" type="text/javascript">
+		var g_targetId = "<%= targetId %>";
+		
 		$(document).ready(function() {
 			startCheckMessageThread("<%= targetId %>");
-			//$(window).unload(chatWindowClose);
+			$(window).unload(chatWindowClose);
 			$('#send_msg').ajaxForm({
 				dataType: 'json',
 				beforeSubmit: beforeSendMessage,
@@ -31,7 +33,7 @@
 	
 	<div>
 		<form id="send_msg" method="post" action="sendMsg.do">
-			<textarea id="message" name="message"></textarea>
+			<textarea id="message" onKeyDown="if (checkEnterKeyAndSend(event.keyCode)) return false;" name="message"></textarea>
 			<input type="submit" value="보내기" />
 			<input type="hidden" name="targetId" value="<%= targetId %>" />
 		</form>

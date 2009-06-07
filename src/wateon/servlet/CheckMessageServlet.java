@@ -3,12 +3,14 @@ package wateon.servlet;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
-import java.util.Queue;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 
 import wateon.WateOn;
 import wateon.WateOnUser;
@@ -49,39 +51,32 @@ public class CheckMessageServlet extends HttpServlet {
 		
 		// 응답을 json으로 보내준다.
 		else {
-			String json = "";
-			
-			// [
-			//   { id: "아이디", nick: "닉네임", msg: "메시지내용" },
-			//   { id: "아이디", nick: "닉네임", msg: "메시지내용" },
-			//   ...
-			// ]
-			
-			// FIXME: ajax 테스트임.
-			Queue<Message> msgs = myself.getChatRoom(targetId).getAllMessages();
-			
-			String messages = "[\n";
-			int size = msgs.size();
-			for (Message msg : msgs) {
-				messages += "{";
-				messages += "id: '" + msg.getId() + "', ";
-				messages += "nick: '" + msg.getNick() + "', ";
-				messages += "msg: '" + msg.getMessage() + "' ";
-				messages += "}";
-				
-				if (size > 0)
-					messages += ",";
-				
-				messages += "\n";
-				size--;
-			}
-			
-			messages += "]\n";
-			
-			json = "{ result: 'success', messages: " + messages + " }";
-			
+			String json = messagesToJson(targetId, myself.getChatRoom(targetId).getAllMessages());
 			writer.println(json);
 		}
 	}
 
+	@SuppressWarnings("unchecked")
+	private String messagesToJson(String targetId, List<Message> messages) {
+		// [
+		//   { id: "아이디", nick: "닉네임", msg: "메시지내용" },
+		//   { id: "아이디", nick: "닉네임", msg: "메시지내용" },
+		//   ...
+		// ]
+		
+		JSONArray results = new JSONArray();
+		
+		for (Message message : messages) {
+			JSONObject msg = new JSONObject();
+			msg.put("id", message.getId());
+			msg.put("nick", message.getNick());
+			msg.put("msg", message.getMessage());
+			results.add(msg);
+		}
+		
+		JSONObject json = new JSONObject();
+		json.put("result", "success");
+		json.put("messages", results);
+		return json.toJSONString();
+	}
 }

@@ -46,16 +46,29 @@ function successedSendMessage(json, state) {
 	if (json.result == 'success') {
 		var chatList = $('#chat_list');
 		var html = message(json.id, json.nick, json.msg, "send");
+		$('#message').val('');
 		chatList.append(html);
 		scrollDown();
 	}
 }
 
 function chatWindowClose() {
+	var targetId = g_targetId;
 	var url = encodeURI('chat.do');
-	$.getJSON(url, {"targetId": "'" + targetId + "'", "action": "close"}, function(json, state) {
+	$.getJSON(url, {"action": "close", "targetId": targetId}, function(json, state) {
 		if (state == 'success') {
 			$(window).close();
 		}
 	});
+}
+
+// if (event.keyCode == 13) { alert('-_-'); return false; } else return true;
+function checkEnterKeyAndSend(keyCode) {
+	if (keyCode == 13) {
+		$('#send_msg').submit();
+		return true;
+	}
+	else {
+		return false;
+	}
 }
