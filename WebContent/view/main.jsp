@@ -12,6 +12,7 @@
 	<script language="javascript" type="text/javascript" src="js/jquery-1.3.2.min.js"></script>
 	<script language="javascript" type="text/javascript" src="js/group.js"></script>
 	<script language="javascript" type="text/javascript" src="js/wateon.js"></script>
+	<script language="javascript" type="text/javascript" src="js/friend.js"></script>
 </head>
 <body>
 	<h3>Login</h3>
@@ -24,6 +25,7 @@
 	</ul>
 	<br />
 	<input type="button" onclick="createGroup()" value="그룹 추가">
+	<input type="button" onclick="addFriend()" value="친구추가">
 	
 	<br />
 	<br />
@@ -41,8 +43,10 @@
 					onclick="javascript:popUpCenter('chat.do?targetId=<%=user.getID()%>', 'Chat', 500, 600); return false;">
 					<%= user.getNameNick() %>
 					</a>
-					<a href="imessage.jsp"
+					<a href="./main.jsp"
 					onclick="javascript:popUpCenter('imessage.jsp?targetId=<%=user.getID() %>', '쪽지', 500, 255); return false;"><쪽지></a>
+					<a href="#" onclick="deleteFriend('<%=user.getID()%>')">(삭제)</a>
+					<a href="#" onclick="banFriend('<%=user.getID()%>')">(차단)</a>
 <%
 				out.println("</li>");
 			}
