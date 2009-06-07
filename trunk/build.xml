@@ -35,6 +35,7 @@
         <path refid="Apache Tomcat v6.0 [Apache Tomcat v6.0].libraryclasspath"/>
         <path refid="Web App Libraries.libraryclasspath"/>
         <path refid="EAR Libraries.libraryclasspath"/>
+        <pathelement location="lib/json_simple-1.1.jar"/>
         <pathelement location="lib/natelib.jar"/>
     </path>
     <target name="init">
