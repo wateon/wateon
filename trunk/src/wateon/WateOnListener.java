@@ -6,7 +6,6 @@ import java.util.Properties;
 import wateon.entity.ChatRoom;
 import wateon.entity.Message;
 
-import kfmes.natelib.NateonMessenger;
 import kfmes.natelib.SwitchBoardSession;
 import kfmes.natelib.entity.GroupList;
 import kfmes.natelib.entity.NateFile;
@@ -16,6 +15,7 @@ import kfmes.natelib.ftp.FileRecver;
 import kfmes.natelib.ftp.FileSender;
 import kfmes.natelib.msg.InstanceMessage;
 import kfmes.natelib.msg.MimeMessage;
+import kfmes.natelib.util.MsgUtil;
 
 public class WateOnListener implements NateListener {
 	private WateOnUser self;
@@ -64,10 +64,33 @@ public class WateOnListener implements NateListener {
 	public void chatMessageReceived(SwitchBoardSession session,
 			NateFriend other, MimeMessage msg) {
 		
+		String targetId = other.getID();
+		
 		// 어느 채팅방인지 찾아낸다.
 		ChatRoom room = self.getChatRoom(other.getID());
-		// 메시지 목록에 추가해준다.
-		room.addNewMessage(new Message(other.getID(), other.getNickName(), msg.getMessage()));
+		
+		// 없으면, 리턴.
+		if (room == null)
+			return;
+		
+		
+		// 일반 메시지..
+		if (msg.getType().equals("MSG")) {
+			// 메시지 목록에 추가해준다.
+			String nick = MsgUtil.getRealString(other.getNickName());
+			String m = MsgUtil.getRealString(msg.getMessage());
+			room.addNewMessage(new Message(targetId, nick, m));
+		}
+		
+		// 상대방이 창을 닫았음! -_-;;
+		else if (msg.getType().equals("QUIT")) {
+			self.closeChatRoom(targetId);
+		}
+		
+		// 그 밖의 경우 -_-;;
+		else {
+			System.out.println("TYPE = " + msg.getType());
+		}
 	}
 
 	@Override

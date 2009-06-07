@@ -1,13 +1,13 @@
 package wateon.entity;
 
 import java.util.LinkedList;
-import java.util.Queue;
+import java.util.List;
 
 import kfmes.natelib.SwitchBoardSession;
 
 public class ChatRoom {
 	private String targetId;
-	private Queue<Message> receivedMessageQ;
+	private List<Message> receivedMessageQ;
 	private SwitchBoardSession session;
 
 	public ChatRoom(String targetId, SwitchBoardSession session) {
@@ -20,12 +20,12 @@ public class ChatRoom {
 		return targetId;
 	}
 
-	public Queue<Message> getReceivedMessageQ() {
+	public List<Message> getReceivedMessageQ() {
 		return receivedMessageQ;
 	}
 
 	/**
-	 * 채팅방을 닫는다.
+	 * 채팅방을 닫는다. (반드시, WateOnUser 를 통해서 호출되야 함.)
 	 */
 	public synchronized void close() {
 		receivedMessageQ.clear();
@@ -44,9 +44,8 @@ public class ChatRoom {
 	 * 모든 메시지를 가져오고나서, 저장되어있던 메시지를 비운다.
 	 * @return 그동안 쌓인 모든 메시지
 	 */
-	public synchronized Queue<Message> getAllMessages() {
-		Queue<Message> queue = null;
-		queue = receivedMessageQ;
+	public synchronized List<Message> getAllMessages() {
+		List<Message> queue = receivedMessageQ;
 		receivedMessageQ = new LinkedList<Message>();
 		return queue;
 	}
