@@ -13,17 +13,16 @@ function startCheckMessageThread(targetId) {
 	chatList.empty();
 
 	jQuery.whileAsync( {
-		delay : 2000,
+		delay : 200,
 		bulk : 0,
 		test : function() {
 			return true;
 		},
 		loop : function() {
-			var msg = '';
 			var url = encodeURI('checkMsg.do');
 			$.getJSON(url, {"targetId": targetId}, function(json, state) {
 				if (state == 'success' && json.result == 'success') {
-					msgs = json.messages;
+					var msgs = json.messages;
 					for (var i = 0; i < msgs.length; i++) {
 						var id = msgs[i].id;
 						var nick = msgs[i].nick;

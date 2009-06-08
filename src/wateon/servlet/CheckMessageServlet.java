@@ -46,7 +46,7 @@ public class CheckMessageServlet extends HttpServlet {
 			writer.println("need target id");
 		
 		// 해당 대화상대와 채팅 방이 있는지 확인한다.
-		else if (myself.hasChatSession(targetId) == false)
+		else if (myself.hasChatRoom(targetId) == false)
 			writer.println("chat room was closed");
 		
 		// 응답을 json으로 보내준다.

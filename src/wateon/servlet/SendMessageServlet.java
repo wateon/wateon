@@ -61,7 +61,7 @@ public class SendMessageServlet extends HttpServlet {
 		}
 		
 		// 해당 상대랑 대화하는 채팅방이 없음.
-		else if (myself.hasChatSession(targetId) == false) {
+		else if (myself.hasChatRoom(targetId) == false) {
 			result.put("result", "fail");
 			result.put("msg", "not exist chat room");
 		}

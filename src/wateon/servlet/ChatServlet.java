@@ -46,7 +46,7 @@ public class ChatServlet extends HttpServlet {
 			writer.println("need target id");
 		
 		// 이미, 해당 대화상대와 채팅중인지 확인한다.
-		else if (myself.hasChatSession(targetId)) {
+		else if (myself.hasChatRoom(targetId)) {
 			if (action != null && action.equals("close"))
 				closeChatRoom(myself, targetId, writer);
 			else
@@ -70,7 +70,7 @@ public class ChatServlet extends HttpServlet {
 		//System.out.println("요청받음 close : " + targetId);
 		
 		// 이미, 해당 대화상대와 채팅중인지 확인한다.
-		if (myself.hasChatSession(targetId)) {
+		if (myself.hasChatRoom(targetId)) {
 			myself.getChatRoom(targetId).close();
 			result = "success";
 			msg = "ok";

@@ -27,10 +27,17 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>WateOn</title>
 	<script language="javascript" type="text/javascript" src="js/jquery-1.3.2.min.js"></script>
+	<script language="javascript" type="text/javascript" src="js/jquery.async.js"></script>
 	<script language="javascript" type="text/javascript" src="js/group.js"></script>
 	<script language="javascript" type="text/javascript" src="js/mystatus.js"></script>
 	<script language="javascript" type="text/javascript" src="js/wateon.js"></script>
 	<script language="javascript" type="text/javascript" src="js/friend.js"></script>
+	<script language="javascript" type="text/javascript">
+		$(document).ready(function() {
+			startCheckWateOnStatusThread();
+			$(window).unload(mainWindowClose);
+		});
+	</script>
 </head>
 <body>
 	<a href="logout.do">Logout</a>
@@ -76,7 +83,7 @@
 				out.println("<li>");
 %>
 					<a href="chat.do?targetId=<%=user.getID()%>"
-					onclick="javascript:popUpCenter('chat.do?targetId=<%=user.getID()%>', 'Chat', 500, 600); return false;">
+					onclick="javascript:popUpChat('<%=user.getID()%>'); return false;">
 					<%= user.getNameNick() %>
 					</a>
 					<a href="./main.jsp"
