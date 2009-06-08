@@ -119,14 +119,4 @@
     <servlet-name>ChatServlet</servlet-name>
     <url-pattern>/chat.do</url-pattern>
   </servlet-mapping>
-  <servlet>
-    <description></description>
-    <display-name>CloseChatServlet</display-name>
-    <servlet-name>CloseChatServlet</servlet-name>
-    <servlet-class>wateon.servlet.CloseChatServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>CloseChatServlet</servlet-name>
-    <url-pattern>/closeChat.do</url-pattern>
-  </servlet-mapping>
 </web-app>
