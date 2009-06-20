@@ -48,7 +48,16 @@
 </head>
 <body topmargin="0" leftmargin="0">
 	<div>
-		<a href="logout.do">Logout</a>
+		<table cellspacing="0" border="0" width="100%">
+			<tr>
+				<td align="left">
+				<img src="image/wateon_logo_small.gif">				
+				</td>
+				<td align="center">
+				<a href="logout.do">Logout</a>
+				</td>
+			</tr>
+		</table>
 	</div>
 	<div class="menu" >
 		<table cellspacing="0" border="0">
@@ -124,3 +133,12 @@
 	
 </body>
 </html>
+
+
+
+
+
+
+
+
+
