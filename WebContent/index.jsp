@@ -12,7 +12,7 @@
 	<p>WateOn is the NateOn that is serviced in SK using web browser.</p>
 	
 	<a href="login.jsp"
-	onclick="javascript:popUpCenter('login.jsp', 'WateOn', 300, 500); return false;">
+	onclick="javascript:popUpCenter('login.jsp', 'WateOn', 305, 500); return false;">
 	Run WateOn Client
 	</a>
 </body>
