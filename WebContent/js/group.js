@@ -1,7 +1,7 @@
 // 그룹.
 function createGroup() {
 	var groupName = prompt("그룹명을 입력하세요", "");
-		
+	
 	if (groupName)
 		$.post("group.do", {groupName: groupName, action: "create"});
 	else
