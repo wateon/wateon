@@ -27,7 +27,7 @@ function processNewChat(chat) {
 // 친구가 상태변경 되었을 때..
 function processFriendChanged(friend) {
 	// TODO: 친구가 상태 변경.
-	alert("[친구 상태 변경]" + friend.id + "\n" + friend.nick + "\n" + friend.status);
+	//alert("[친구 상태 변경]" + friend.id + "\n" + friend.nick + "\n" + friend.status);
 }
 
 // 계속 상태 변화를 체크한다.
@@ -68,5 +68,5 @@ function startCheckWateOnStatusThread() {
 // 메인 윈도우를 닫으려고 할 때
 function mainWindowClose() {
 	// TODO: 서버에 로그아웃 메시지를 날려주자.
-	alert('끄는구나?');
+	//alert('끄는구나?');
 }
