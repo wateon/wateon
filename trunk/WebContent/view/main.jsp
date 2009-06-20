@@ -43,6 +43,21 @@
 		$(document).ready(function() {
 			startCheckWateOnStatusThread();
 			$(window).unload(mainWindowClose);
+
+			var status = $('#myStatus').attr('value');
+			
+			if (status == "O")
+				$("#myStatusImage").attr('src', 'image/wateon_state_1.gif');
+			else if (status == "A")
+				$("#myStatusImage").attr('src', 'image/wateon_state_2.gif');
+			else if (status == "B")
+				$("#myStatusImage").attr('src', 'image/wateon_state_3.gif');
+			else if (status == "P")
+				$("#myStatusImage").attr('src', 'image/wateon_state_3.gif');
+			else if (status == "M")
+				$("#myStatusImage").attr('src', 'image/wateon_state_2.gif');
+			else if (status == "X")
+				$("#myStatusImage").attr('src', 'image/wateon_state_1.gif');
 		});
 	</script>
 </head>
@@ -68,28 +83,32 @@
 			</tr>
 			<tr>
 				<td>상태 :</td>
-				<td>&nbsp;<select name="myStatus" id="myStatus"
-					onchange="setStatus()">
-					<option value="O" <%=selected[0]%>>온라인</option>
-					<option value="A" <%=selected[1]%>>자리비움</option>
-					<option value="B" <%=selected[2]%>>다른용무중</option>
-					<option value="P" <%=selected[3]%>>통화중</option>
-					<option value="M" <%=selected[4]%>>회의중</option>
-					<option value="X" <%=selected[5]%>>오프라인으로 표시</option>
-				</select>
+				<td>
+					<select name="myStatus" id="myStatus" onchange="setStatus()">
+						<option value="O" <%=selected[0]%>>온라인</option>
+						<option value="A" <%=selected[1]%>>자리비움</option>
+						<option value="B" <%=selected[2]%>>다른용무중</option>
+						<option value="P" <%=selected[3]%>>통화중</option>
+						<option value="M" <%=selected[4]%>>회의중</option>
+						<option value="X" <%=selected[5]%>>오프라인으로 표시</option>
+					</select>
 				</td>
 				<td>
-				<img src="image/wateon_cyworld.gif" onclick="popUpCyworld('<%=myCyworld%>')">
+					<img src="image/wateon_cyworld.gif" onclick="popUpCyworld('<%=myCyworld%>')">
+				</td>
+			</tr>
+			<tr>
+				<td align="left">
+					<img id="myStatusImage" src="" style="margin: 0px 0px 0px 0px;"/>
+				</td>
+				<td colspan="2" align="right">
+					<input type="button" onclick="createGroup()" value="그룹 추가">
+					<input type="button" onclick="addFriend()" value="친구추가">
 				</td>
 			</tr>
 		</table>
 	</div>
-	
-	<div align="right">
-		<input type="button" onclick="createGroup()" value="그룹 추가">
-		<input type="button" onclick="addFriend()" value="친구추가">
-	</div>
-	
+	<br />
 	<div class="friend_list">
 <%
 	for (NateGroup group : groups) {
