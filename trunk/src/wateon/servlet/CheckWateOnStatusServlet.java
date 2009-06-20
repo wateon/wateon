@@ -76,6 +76,7 @@ public class CheckWateOnStatusServlet extends HttpServlet {
 		for (InstanceMessage imessage : myself.getAllInstanceMessages()) {
 			JSONObject imsg = new JSONObject();
 			imsg.put(TYPE, IMESSAGE);	// 종류를 쪽지라고 표시한다.
+			imsg.put("name", imessage.getFriend().getRealName());
 			imsg.put("from", imessage.getFrom());
 			imsg.put("msg", imessage.getMessage());
 			results.add(imsg);
