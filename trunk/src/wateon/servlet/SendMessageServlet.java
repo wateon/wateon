@@ -48,39 +48,45 @@ public class SendMessageServlet extends HttpServlet {
 			result.put("msg", "need login");
 		}
 		
-		// 상대방 아이디가 있는지 확인한다.
-		else if (targetId == null || targetId.equals("")) {
-			result.put("result", "fail");
-			result.put("msg", "need target id");
-		}
-		
-		// 메시지 내용이 있는지 확인.
-		else if (message == null || message.equals("")) {
-			result.put("result", "fail");
-			result.put("msg", "메시지 내용이 없습니다.");
-		}
-		
-		// 해당 상대랑 대화하는 채팅방이 없음.
-		else if (myself.hasChatRoom(targetId) == false) {
-			result.put("result", "fail");
-			result.put("msg", "not exist chat room");
-		}
-		
-		// 성공
 		else {
-			ChatRoom room = myself.getChatRoom(targetId);
-			if (room.sendMessage(message)) {
-				// TODO: message 에 URL encoding 이 필요함!!!
-				String nick = MsgUtil.getRealString(myself.getNateonMessenger().getOwner().getNickName());
-				
-				result.put("result", "success");
-				result.put("id", id);
-				result.put("nick", nick);
-				result.put("msg", message);
-			}
-			else {
+			// 접속기록 갱신
+			myself.updateTime();
+			
+			
+			// 상대방 아이디가 있는지 확인한다.
+			if (targetId == null || targetId.equals("")) {
 				result.put("result", "fail");
-				result.put("msg", "안보내졌음;;;");
+				result.put("msg", "need target id");
+			}
+			
+			// 메시지 내용이 있는지 확인.
+			else if (message == null || message.equals("")) {
+				result.put("result", "fail");
+				result.put("msg", "메시지 내용이 없습니다.");
+			}
+			
+			// 해당 상대랑 대화하는 채팅방이 없음.
+			else if (myself.hasChatRoom(targetId) == false) {
+				result.put("result", "fail");
+				result.put("msg", "not exist chat room");
+			}
+			
+			// 성공
+			else {
+				ChatRoom room = myself.getChatRoom(targetId);
+				if (room.sendMessage(message)) {
+					// TODO: message 에 URL encoding 이 필요함!!!
+					String nick = MsgUtil.getRealString(myself.getNateonMessenger().getOwner().getNickName());
+					
+					result.put("result", "success");
+					result.put("id", id);
+					result.put("nick", nick);
+					result.put("msg", message);
+				}
+				else {
+					result.put("result", "fail");
+					result.put("msg", "안보내졌음;;;");
+				}
 			}
 		}
 		

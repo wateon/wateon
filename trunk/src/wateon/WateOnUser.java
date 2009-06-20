@@ -1,6 +1,8 @@
 package wateon;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -25,6 +27,8 @@ public class WateOnUser {
 	private String id;
 	private NateonMessenger nateOn;
 
+	private Date lastdate;
+
 	/**
 	 * WateOnUser 생성자
 	 * @param id 네이트 아이디
@@ -43,6 +47,9 @@ public class WateOnUser {
 		instanceMessageQ = new ArrayList<InstanceMessage>();
 		friendModifiedQ = new ArrayList<NateFriend>();
 		receivedChatRoomQ = new ArrayList<String>();
+		
+		// 생성된 시간을 넣어줌.
+		this.lastdate = new Date();
 	}
 	
 	/**
@@ -197,5 +204,47 @@ public class WateOnUser {
 		if (hasChatRoom(targetId) == false)
 			chatRooms.put(targetId, new ChatRoom(targetId, session));
 		return getChatRoom(targetId);
+	}
+
+	/**
+	 * 채팅방을 모두 닫아주고, 실제로 로그아웃을 한다. 
+	 */
+	public void logout() {
+		// 열려진 채팅방을 모두 닫는다.
+		for (ChatRoom room : chatRooms.values())
+			room.close();
+		
+		// 실제로, 네이트온에서 로그아웃 한다.
+		try {
+			NateonMessenger msger = this.getNateonMessenger();
+			if (msger != null && msger.isLoggedIn())
+				msger.logout();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public boolean isConnected() {
+		Date now = new Date();
+		long diff = now.getTime() - lastdate.getTime();
+		
+		//System.out.println("[" + id + "] diff = " + diff);
+		
+		// 마지막 체크 후, 5초 이내인지 확인.
+		return diff < 5000;
+	}
+
+	public void checkRooms() {
+		for (ChatRoom room : chatRooms.values()) { 
+			synchronized (this.chatRooms) {
+				if (room.isConnected() == false) {
+					this.closeChatRoom(room.getTargetId());
+				}
+			}
+		}
+	}
+
+	public void updateTime() {
+		lastdate = new Date();
 	}
 }

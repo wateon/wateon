@@ -45,8 +45,8 @@ public class FriendManagementServlet extends HttpServlet {
 			myself.getNateonMessenger().getNS().sendBlock(friend, false);
 		}
 		else if (action.equals("unban")) {
+			// TODO: 이거 뭐야?? 차단 푸는거??
 		}
-			// TODO Auto-generated method stub
 	}
 
 }

@@ -15,10 +15,11 @@
 	<script language="javascript" type="text/javascript" src="js/chat.js"></script>
 	<script language="javascript" type="text/javascript">
 		var g_targetId = "<%= targetId %>";
+		var g_checkMessage = true;
 		
 		$(document).ready(function() {
 			startCheckMessageThread("<%= targetId %>");
-			$(window).unload(chatWindowClose);
+			//$(window).unload(chatWindowClose);
 			$('#send_msg').ajaxForm({
 				dataType: 'json',
 				beforeSubmit: beforeSendMessage,

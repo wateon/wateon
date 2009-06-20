@@ -33,6 +33,9 @@ public class SendInstanceMessageServlet extends HttpServlet {
 		String message = request.getParameter("message");
 		WateOnUser myself = WateOn.getInstance().getWateOnUser(senderId);
 		
+		// 마지막 접속 기록을 갱신.
+		myself.updateTime();
+		
 		InstanceMessage msg = new InstanceMessage(senderId, targetId, message);
 		myself.getNateonMessenger().sendIMessage(msg);
 	}

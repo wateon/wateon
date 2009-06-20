@@ -1,6 +1,6 @@
 package wateon;
 
-import java.io.IOException;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -9,20 +9,32 @@ import javax.servlet.http.HttpSession;
 import kfmes.natelib.NateonMessenger;
 
 public class WateOn {
-	private static WateOn uniqueInstance = new WateOn();
+	private volatile static WateOn uniqueInstance = new WateOn();
+	private volatile static ConnectionCloserThread closerThread;
 	private Map<String, WateOnUser> users = new HashMap<String, WateOnUser>();
 	
 	private WateOn() {
 	}
 	
 	public static WateOn getInstance() {
+		// 처음 실행하는거면, 쓰레드를 만든다.
+		if (closerThread == null) {
+			synchronized (WateOn.class) {
+				if (closerThread == null) {
+					closerThread = new ConnectionCloserThread();
+					new Thread(closerThread).start();
+				}
+			}
+		}
+		
+		// 인스턴스를 넘겨줌.
 		return uniqueInstance;
 	}
 	
 	public WateOnUser getWateOnUser(String id) {
 		return users.get(id);
 	}
-	
+
 	public boolean login(String id, String password, HttpSession session) {
 		if (id == null || password == null)
 			return false;
@@ -41,7 +53,7 @@ public class WateOn {
 		
 		return logged;
 	}
-	
+
 	public boolean logout(String id) {
 		WateOnUser wateOnUser = users.get(id);
 		
@@ -49,19 +61,22 @@ public class WateOn {
 			return false;
 		
 		else {
-			// TODO: 채팅방을 모두 닫아준다.
-			// TODO: 메시지 큐도 모두 제거한다.
-			
-			try {
-				NateonMessenger msger = wateOnUser.getNateonMessenger();
-				if (msger != null && msger.isLoggedIn())
-					msger.logout();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-			
+			wateOnUser.logout();
 			users.remove(id);
 			return true;
+		}
+	}
+
+	public void checkAllConnection() {
+		for (WateOnUser user : users.values()) {
+			synchronized (user) {
+				// 로그인 연결 여부 체크
+				if (user.isConnected() == false) {
+					this.logout(user.getId());
+				}
+				// 채팅방들이 닫혔는지 확인.
+				user.checkRooms();
+			}
 		}
 	}
 }
