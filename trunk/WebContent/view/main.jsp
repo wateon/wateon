@@ -4,9 +4,15 @@
 	List<NateGroup> groups = (List<NateGroup>)request.getAttribute("groups");
 	NateFriend myself = (NateFriend)request.getAttribute("myself");
 	
+	
+	
+	
+	String myCyworld = (String) request.getAttribute("cyworldUrl");
+	String myEmail = myself.getEmail();
+	
 	String currentStatus = myself.getStatus();
 	String selected[] = { "", "", "", "", "", "" };
-	if (currentStatus.equals("X"))
+	if (currentStatus.equals("O"))
 		selected[0] = "selected";
 	else if (currentStatus.equals("A"))
 		selected[1] = "selected";
@@ -40,22 +46,20 @@
 		});
 	</script>
 </head>
-<body>
-	<div class="menu">
+<body topmargin="0" leftmargin="0">
+	<div>
 		<a href="logout.do">Logout</a>
+	</div>
+	<div class="menu" >
 		<table cellspacing="0" border="0">
 			<tr>
-				<td>아이디</td>
-				<td>:&nbsp;<%=myself.getNateID()%></td>
-			</tr>
-			<tr>
-				<td>닉네임</td>
-				<td>:&nbsp;<input type="text" name="myNickName"OnClick=setNickName(); ReadOnly value="<%=myself.getNickName()%>" />
+				<td>닉네임 :</td>
+				<td colspan="2">&nbsp;<input type="text" name="myNickName"OnClick=setNickName(); ReadOnly value="<%=myself.getNickName()%>" size="30" />
 				</td>
 			</tr>
 			<tr>
-				<td>상태</td>
-				<td>:&nbsp;<select name="myStatus" id="myStatus"
+				<td>상태 :</td>
+				<td>&nbsp;<select name="myStatus" id="myStatus"
 					onchange="setStatus()">
 					<option value="O" <%=selected[0]%>>온라인</option>
 					<option value="A" <%=selected[1]%>>자리비움</option>
@@ -63,12 +67,16 @@
 					<option value="P" <%=selected[3]%>>통화중</option>
 					<option value="M" <%=selected[4]%>>회의중</option>
 					<option value="X" <%=selected[5]%>>오프라인으로 표시</option>
-				</select></td>
+				</select>
+				</td>
+				<td>
+				<img src="image/wateon_cyworld.gif" onclick="popUpCyworld('<%=myCyworld%>')">
+				</td>
 			</tr>
 		</table>
 	</div>
 	
-	<div>
+	<div align="right">
 		<input type="button" onclick="createGroup()" value="그룹 추가">
 		<input type="button" onclick="addFriend()" value="친구추가">
 	</div>

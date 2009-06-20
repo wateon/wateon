@@ -70,3 +70,8 @@ function mainWindowClose() {
 	// TODO: 서버에 로그아웃 메시지를 날려주자.
 	//alert('끄는구나?');
 }
+
+function popUpCyworld(url){
+	window.open(url, 'Register', 'top=300, left=500 width=950, height=600, scrollbar=no');
+}
+
