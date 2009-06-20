@@ -13,10 +13,35 @@ function popUpChat(targetId) {
 }
 
 
+/////////////////////////////////////////////////////////////////////////////////////////
+//Argument	: Message
+//Return	: None
+//Comment	: 메시지를 입력받아 새로운창을 뛰어서 메시지를 뿌려준다.
+/////////////////////////////////////////////////////////////////////////////////////////
+function MessageBox(strMessage){
+
+	MsgWin=window.open('','','scrollbar=no,width=300, height=205,top=200,left=200');
+	MsgWin.document.write("<html><head><meta http-equiv='content-type' content='text/html; charset=euc-kr'> <title>WateOn Message</title> <meta name='generator' content='Namo WebEditor v6.0'> </head> <body bgcolor='white' text='black' link='blue' vlink='purple' alink='red' leftmargin=0 topmargin=0> <TABLE height=200 cellSpacing=1 cellPadding=0 width=300 bgColor=#85bee0 border=0>  <TBODY>  <TR>   <TD align=middle width=300 bgColor=#e7f3f5 height=50>    <p>  <b><font color='#AEAEFF'><span style='font-size:12pt;'>▒</span></font></b><font color='#0000CC'><span style='font-size:12pt;'><b>&nbsp; Message Box&nbsp;</b></span></font> <b><font color='#AEAEFF'><span style='font-size:12pt;'>▒</span></font></b></p> </TD></TR>  <TR>   <TD align=middle width=300 bgColor=#f4fafb height=100><span style='font-size:10pt;'>"+strMessage+"</span> </TD></TD>  </tr>  <TR>   <TD align=middle width=300 bgColor=#f4fafb height=50>    <table border='1' width='91' style='border-top-width:1; border-left-width:1; border-top-color:rgb(133,190,224); border-left-color:rgb(133,190,224); border-top-style:none; border-left-style:none;'>     <tr>      <td width='81' style='border-top-width:1; border-right-width:2; border-bottom-width:2; border-left-width:1; border-top-style:none; border-right-style:solid; border-bottom-style:solid; border-left-style:none;' onClick='javascript:window.close();'>      <p align='center'><span style='font-size:10pt;'>Close</span></p> </td>     </tr>    </table> </TD></TR></TBODY></TABLE><p>&nbsp;</p> </body> </html>");
+}
+
+
+/////////////////////////////////////////////////////////////////////////////////////////
+//Argument	: Message
+//Return	: None
+//Comment	: 메시지를 입력받아 새로운창을 뛰어서 메시지를 뿌려준다.
+/////////////////////////////////////////////////////////////////////////////////////////
+function ReceivedMessageBox(strFrom, strMessage){
+
+MsgWin=window.open('','','scrollbar=no,width=300, height=205,top=200,left=200');
+MsgWin.document.write("<html> <head> <meta http-equiv='content-type' content='text/html; charset=euc-kr'> <title>WateOn Message</title> </head> <body bgcolor='white' text='black' link='blue' vlink='purple' 	alink='red' leftmargin=0 topmargin=0> <TABLE height=200 cellSpacing=1 cellPadding=0 width=300 bgColor=#85bee0 	border=0> 	<TBODY> 		<TR> 			<TD align=middle width=300 bgColor=#e7f3f5 height=50> 			<p><font color='#0000CC'> 				<span style='font-size: 12pt;'> 				<b>보낸이 : "+strFrom+"</b> 				</span> 				</font> 			</p> 			</TD> 		</TR> 		<TR> 			<TD align=middle width=300 bgColor=#f4fafb height=100> 			<textarea style='font-size: 10pt; width:100%; height:100%;'>"+strMessage+"</textarea></TD> 			</TD> 		</tr> 		<TR> 			<TD align=middle width=300 bgColor=#f4fafb height=50> 			<table border='1' width='91' 				style='border-top-width: 1; border-left-width: 1; border-top-color: rgb(133, 190, 224); border-left-color: rgb(133, 190, 224); border-top-style: none; border-left-style: none;'> 				<tr> 					<td width='81' 						style='border-top-width: 1; border-right-width: 2; border-bottom-width: 2; border-left-width: 1; border-top-style: none; border-right-style: solid; border-bottom-style: solid; border-left-style: none;' 						onClick='javascript: window.close();'> 					<p align='center'><span style='font-size: 10pt;'>Close</span></p> 					</td> 				</tr> 			</table> 			</TD> 		</TR> 	</TBODY> </TABLE> <p>&nbsp;</p> </body> </html>");
+}
+
+
 // 쪽지 받았을때..
 function processInstanceMessage(imsg) {
 	// TODO: 쪽지 받았음. 팝업으로 바꾸자!
-	alert("[쪽지]" + "\n" + imsg.from + "\n" + imsg.msg);
+	ReceivedMessageBox(imsg.from , imsg.msg);
+	
 }
 
 // 채팅창 열기
