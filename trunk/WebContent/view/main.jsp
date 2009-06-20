@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import="kfmes.natelib.entity.*, java.util.List" %>
+<%@ page import="kfmes.natelib.entity.*, kfmes.natelib.util.*, java.util.List" %>
 <%
 	List<NateGroup> groups = (List<NateGroup>)request.getAttribute("groups");
 	NateFriend myself = (NateFriend)request.getAttribute("myself");
@@ -63,7 +63,7 @@
 		<table cellspacing="0" border="0">
 			<tr>
 				<td>닉네임 :</td>
-				<td colspan="2">&nbsp;<input type="text" name="myNickName"OnClick=setNickName(); ReadOnly value="<%=myself.getNickName()%>" size="30" />
+				<td colspan="2">&nbsp;<input type="text" name="myNickName" OnClick=setNickName(); ReadOnly value="<%=MsgUtil.getRealString(myself.getNickName())%>" size="30" border="0"/>
 				</td>
 			</tr>
 			<tr>
