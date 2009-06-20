@@ -16,7 +16,7 @@ function startCheckMessageThread(targetId) {
 		delay : 200,
 		bulk : 0,
 		test : function() {
-			return true;
+			return g_checkMessage;
 		},
 		loop : function() {
 			var url = encodeURI('checkMsg.do');
@@ -31,6 +31,10 @@ function startCheckMessageThread(targetId) {
 						chatList.append(message(id, nick, msg, "receive"));
 						scrollDown();
 					}
+				}
+				else if (json.result == 'fail') {
+					g_checkMessage = false;
+					alert(json.messages);
 				}
 			});
 		}
@@ -51,7 +55,24 @@ function successedSendMessage(json, state) {
 	}
 }
 
-function chatWindowClose() {
+function chatWindowClose(e) {
+/*
+	// Firefox || IE
+	e = e || window.event;
+	var y = e.pageY || e.clientY;
+	
+	// window closed
+	if (y < 0) {
+		alert('닫아?');
+	}
+	
+	else {
+		// window refresh -_-;
+		alert('새로고침?');
+	}
+*/
+	
+/*
 	var targetId = g_targetId;
 	var url = encodeURI('chat.do');
 	$.getJSON(url, {"action": "close", "targetId": targetId}, function(json, state) {
@@ -59,9 +80,10 @@ function chatWindowClose() {
 			$(window).close();
 		}
 	});
+*/
 }
 
-// if (event.keyCode == 13) { alert('-_-'); return false; } else return true;
+//if (event.keyCode == 13) { alert('-_-'); return false; } else return true;
 function checkEnterKeyAndSend(keyCode) {
 	if (keyCode == 13) {
 		$('#send_msg').submit();

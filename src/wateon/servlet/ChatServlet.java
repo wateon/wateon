@@ -67,7 +67,7 @@ public class ChatServlet extends HttpServlet {
 		String result;
 		String msg;
 		
-		//System.out.println("요청받음 close : " + targetId);
+		System.out.println("요청받음 close : " + targetId);
 		
 		// 이미, 해당 대화상대와 채팅중인지 확인한다.
 		if (myself.hasChatRoom(targetId)) {

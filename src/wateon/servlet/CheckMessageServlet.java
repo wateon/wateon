@@ -18,7 +18,7 @@ import wateon.entity.Message;
 
 public class CheckMessageServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		call(request, response);
 	}
@@ -37,27 +37,58 @@ public class CheckMessageServlet extends HttpServlet {
 		WateOnUser myself = WateOn.getInstance().getWateOnUser(id);
 		PrintWriter writer = response.getWriter();
 		
+		String result = null;
+		String msg = "";
+		
+		JSONArray messages = null;
+		
 		// 내 아이디가 있는지, 로그인 된 상태인지 확인한다.
 		if (id == null || myself == null || myself.isLogged() == false)
-			writer.println("need login");
+			msg = "need login";
 		
-		// 상대방 아이디가 있는지 확인한다.
-		else if (targetId == null || targetId.equals(""))
-			writer.println("need target id");
-		
-		// 해당 대화상대와 채팅 방이 있는지 확인한다.
-		else if (myself.hasChatRoom(targetId) == false)
-			writer.println("chat room was closed");
-		
-		// 응답을 json으로 보내준다.
+		// 로그인 되어있으면,
 		else {
-			String json = messagesToJson(targetId, myself.getChatRoom(targetId).getAllMessages());
-			writer.println(json);
+			// 접속기록 갱신
+			myself.updateTime();
+			
+			// 상대방 아이디가 있는지 확인한다.
+			if (targetId == null || targetId.equals(""))
+				msg = "need target id";
+			
+			// 해당 대화상대와 채팅 방이 있는지 확인한다.
+			else if (myself.hasChatRoom(targetId) == false)
+				// TODO: 채팅방을 새로 만들어준다??
+				msg = "chat room was closed";
+			
+			// 응답을 json으로 보내준다.
+			else {
+				// 채팅방 접속기록 갱신
+				myself.getChatRoom(targetId).updateTime();
+				
+				messages = messagesToJson(targetId, myself.getChatRoom(targetId).getAllMessages());
+				result = "success";
+				msg = "";
+			}
 		}
+		
+		if (result == null)
+			result = "fail";
+		
+		JSONObject jsonResults = generateJSONResults(result, msg, messages);
+		writer.println(jsonResults.toJSONString());
 	}
 
 	@SuppressWarnings("unchecked")
-	private String messagesToJson(String targetId, List<Message> messages) {
+	private JSONObject generateJSONResults(String result, String msg, JSONArray messages) {
+		JSONObject jsonResults = new JSONObject();
+		jsonResults.put("result", result);
+		jsonResults.put("msg", msg);
+		jsonResults.put("messages", messages);
+		return jsonResults;
+	}
+
+	@SuppressWarnings("unchecked")
+	private JSONArray messagesToJson(String targetId, List<Message> messages) {
 		// [
 		//   { id: "아이디", nick: "닉네임", msg: "메시지내용" },
 		//   { id: "아이디", nick: "닉네임", msg: "메시지내용" },
@@ -74,9 +105,6 @@ public class CheckMessageServlet extends HttpServlet {
 			results.add(msg);
 		}
 		
-		JSONObject json = new JSONObject();
-		json.put("result", "success");
-		json.put("messages", results);
-		return json.toJSONString();
+		return results;
 	}
 }

@@ -46,6 +46,9 @@ public class CheckWateOnStatusServlet extends HttpServlet {
 		
 		// 로그인 되었으면..
 		else {
+			// 접속기록 갱신
+			myself.updateTime();
+			
 			results.put("result", "success");
 			results.put("updated", dataToJson(myself));
 		}

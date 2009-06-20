@@ -1,5 +1,6 @@
 package wateon.entity;
 
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -9,11 +10,13 @@ public class ChatRoom {
 	private String targetId;
 	private List<Message> receivedMessageQ;
 	private SwitchBoardSession session;
+	private Date lasttime;
 
 	public ChatRoom(String targetId, SwitchBoardSession session) {
 		receivedMessageQ = new LinkedList<Message>();
 		this.targetId = targetId;
 		this.session = session;
+		lasttime = new Date();
 	}
 
 	public String getTargetId() {
@@ -52,5 +55,19 @@ public class ChatRoom {
 
 	public boolean sendMessage(String message) {
 		return session.sendMessage(message);
+	}
+
+	public boolean isConnected() {
+		Date now = new Date();
+		long diff = now.getTime() - lasttime.getTime();
+		
+		//System.out.println("채팅방 : " + diff);
+		
+		// 마지막 체크 후, 2초 이내인지 확인.
+		return diff < 2000;
+	}
+
+	public void updateTime() {
+		lasttime = new Date();
 	}
 }
