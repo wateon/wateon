@@ -3,7 +3,9 @@
 .menu {
 	font-size: 12px;
 	font-weight: bold;
-	background: #28f08c;
+	background: #A1D3E9;
+	padding:5px;
+	
 }
 
 .friend_list * {
@@ -22,7 +24,7 @@
 
 .friend_list h3 {
 	cursor: pointer;
-	background-color: #cccccc;
+	background-color: #F1F1F1;
 	padding: 2px;
 }
 
@@ -32,6 +34,6 @@
 }
 
 .friend_list li ul {
-	border: 1px solid #cccccc;
+	border: 1px solid #F1F1F1;
 	display: none;
 }
