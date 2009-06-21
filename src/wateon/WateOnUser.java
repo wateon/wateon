@@ -16,6 +16,8 @@ import kfmes.natelib.msg.InstanceMessage;
 
 
 public class WateOnUser {
+	private static final int LOGIN_KEEPALIVE = 5000;	// 인터넷 끊긴지 5초동안은 로그인 유지.
+
 	private NateListener listener;
 
 	private Map<String, ChatRoom> chatRooms;
@@ -230,8 +232,8 @@ public class WateOnUser {
 		
 		//System.out.println("[" + id + "] diff = " + diff);
 		
-		// 마지막 체크 후, 5초 이내인지 확인.
-		return diff < 5000;
+		// 마지막 체크 후, 특정 시간 이내인지 확인.
+		return diff < LOGIN_KEEPALIVE;
 	}
 
 	public void checkRooms() {

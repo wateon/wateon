@@ -75,7 +75,6 @@ public class SendMessageServlet extends HttpServlet {
 			else {
 				ChatRoom room = myself.getChatRoom(targetId);
 				if (room.sendMessage(message)) {
-					// TODO: message 에 URL encoding 이 필요함!!!
 					String nick = MsgUtil.getRealString(myself.getNateonMessenger().getOwner().getNickName());
 					
 					result.put("result", "success");

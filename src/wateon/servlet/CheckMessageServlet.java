@@ -14,6 +14,7 @@ import org.json.simple.JSONObject;
 
 import wateon.WateOn;
 import wateon.WateOnUser;
+import wateon.entity.ChatRoom;
 import wateon.entity.Message;
 
 public class CheckMessageServlet extends HttpServlet {
@@ -41,6 +42,7 @@ public class CheckMessageServlet extends HttpServlet {
 		String msg = "";
 		
 		JSONArray messages = null;
+		ChatRoom room = null;
 		
 		// 내 아이디가 있는지, 로그인 된 상태인지 확인한다.
 		if (id == null || myself == null || myself.isLogged() == false)
@@ -63,9 +65,9 @@ public class CheckMessageServlet extends HttpServlet {
 			// 응답을 json으로 보내준다.
 			else {
 				// 채팅방 접속기록 갱신
-				myself.getChatRoom(targetId).updateTime();
-				
-				messages = messagesToJson(targetId, myself.getChatRoom(targetId).getAllMessages());
+				room = myself.getChatRoom(targetId);
+				room.updateTime();
+				messages = messagesToJson(room);
 				result = "success";
 				msg = "";
 			}
@@ -74,21 +76,31 @@ public class CheckMessageServlet extends HttpServlet {
 		if (result == null)
 			result = "fail";
 		
-		JSONObject jsonResults = generateJSONResults(result, msg, messages);
+		JSONObject jsonResults = generateJSONResults(room, result, msg, messages);
 		writer.println(jsonResults.toJSONString());
 	}
 
 	@SuppressWarnings("unchecked")
-	private JSONObject generateJSONResults(String result, String msg, JSONArray messages) {
+	private JSONObject generateJSONResults(ChatRoom room, String result, String msg, JSONArray messages) {
 		JSONObject jsonResults = new JSONObject();
 		jsonResults.put("result", result);
 		jsonResults.put("msg", msg);
 		jsonResults.put("messages", messages);
+
+		if (room != null) {
+			// 타이핑 여부
+			jsonResults.put("typing", room.getTypingMessage());
+
+			// // 채팅방 닫혔는지 여부
+			// if (room.isConnected() == false)
+			// jsonResults.put("closed", true);
+		}
+
 		return jsonResults;
 	}
 
 	@SuppressWarnings("unchecked")
-	private JSONArray messagesToJson(String targetId, List<Message> messages) {
+	private JSONArray messagesToJson(ChatRoom room) {
 		// [
 		//   { id: "아이디", nick: "닉네임", msg: "메시지내용" },
 		//   { id: "아이디", nick: "닉네임", msg: "메시지내용" },
@@ -96,6 +108,7 @@ public class CheckMessageServlet extends HttpServlet {
 		// ]
 		
 		JSONArray results = new JSONArray();
+		List<Message> messages = room.getAllMessages();
 		
 		for (Message message : messages) {
 			JSONObject msg = new JSONObject();
