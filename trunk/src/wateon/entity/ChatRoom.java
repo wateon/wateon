@@ -5,12 +5,18 @@ import java.util.LinkedList;
 import java.util.List;
 
 import kfmes.natelib.SwitchBoardSession;
+import kfmes.natelib.entity.NateFriend;
+import kfmes.natelib.util.MsgUtil;
 
 public class ChatRoom {
+	private static final int CHATROOM_KEEPALIVE = 1500;	// 핑이 1.5초동안 없어도 채팅방 유지
+	
 	private String targetId;
 	private List<Message> receivedMessageQ;
 	private SwitchBoardSession session;
 	private Date lasttime;
+
+	private String typingMessage = "";
 
 	public ChatRoom(String targetId, SwitchBoardSession session) {
 		receivedMessageQ = new LinkedList<Message>();
@@ -41,6 +47,7 @@ public class ChatRoom {
 	 */
 	public synchronized void addNewMessage(Message msg) {
 		receivedMessageQ.add(msg);
+		addTyping(null, false);
 	}
 
 	/**
@@ -63,11 +70,22 @@ public class ChatRoom {
 		
 		//System.out.println("채팅방 : " + diff);
 		
-		// 마지막 체크 후, 2초 이내인지 확인.
-		return diff < 2000;
+		// 마지막 체크 후, ?초 이내인지 확인.
+		return session.isConnected() && diff < CHATROOM_KEEPALIVE;
 	}
 
 	public void updateTime() {
 		lasttime = new Date();
+	}
+
+	public void addTyping(NateFriend friend, boolean typing) {
+		if (typing)
+			typingMessage = "글을 쓰고 있습니다: " + MsgUtil.getRealString(friend.getNickName());
+		else
+			typingMessage = "";
+	}
+
+	public String getTypingMessage() {
+		return typingMessage;
 	}
 }

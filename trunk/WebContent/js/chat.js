@@ -22,6 +22,8 @@ function startCheckMessageThread(targetId) {
 			var url = encodeURI('checkMsg.do');
 			$.getJSON(url, {"targetId": targetId}, function(json, state) {
 				if (state == 'success' && json.result == 'success') {
+					
+					// 그동안 받은 메시지를 모두 보여준다.
 					var msgs = json.messages;
 					for (var i = 0; i < msgs.length; i++) {
 						var id = msgs[i].id;
@@ -31,10 +33,23 @@ function startCheckMessageThread(targetId) {
 						chatList.append(message(id, nick, msg, "receive"));
 						scrollDown();
 					}
+					
+					// 타이핑 하는 메시지를 보여준다.
+					$("#typing").text(json.typing);
 				}
 				else if (json.result == 'fail') {
 					g_checkMessage = false;
-					alert(json.messages);
+					
+					// 채팅이 끝났음. (상대가 나갔음)
+					if (json.msg == "chat room was closed") {
+						$("#message").attr("disabled", true);
+						chatList.append("상대방이 나갔습니다.");
+					}
+					
+					// 그 외의 에러
+					else {
+						alert(json.msg);
+					}
 				}
 			});
 		}

@@ -39,5 +39,8 @@
 			<input type="hidden" name="targetId" value="<%= targetId %>" />
 		</form>
 	</div>
+	
+	<div id="typing">
+	</div>
 </body>
 </html>
