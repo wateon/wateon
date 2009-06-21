@@ -42,7 +42,7 @@ public class FriendManagementServlet extends HttpServlet {
 			NateFriend friend = new NateFriend(friendId);
 			friend.setFABR(friendId);
 			friend.setUid(friendId);
-			myself.getNateonMessenger().getNS().sendBlock(friend, false);
+			myself.getNateonMessenger().getNS().sendBlock(friend, true);
 		}
 		else if (action.equals("unban")) {
 			// TODO: 이거 뭐야?? 차단 푸는거??
