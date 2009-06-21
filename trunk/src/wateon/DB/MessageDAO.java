@@ -11,7 +11,7 @@ public class MessageDAO {
 	
 	public boolean insertMessage(MessageDTO dto) {
 	
-		String query = "insert into message(sender, receiver, message, date) values(?,?,?, sysdate)";
+		String query = "insert into message(sender, receiver, message, date) values(?,?,?, sysdate())";
 		int result = 0;
 
 		conn = new DBConnector().getConnection();
@@ -41,7 +41,7 @@ public class MessageDAO {
 
 	public boolean insertIMessage(MessageDTO dto) {
 		
-		String query = "insert into imessage(sender, receiver, message, date) values(?,?,?, sysdate)";
+		String query = "insert into imessage(sender, receiver, message, date) values(?,?,?, sysdate())";
 		int result = 0;
 
 		conn = new DBConnector().getConnection();
