@@ -1,4 +1,5 @@
 // 그룹.
+
 function createGroup() {
 	var groupName = prompt("그룹명을 입력하세요", "");
 	
