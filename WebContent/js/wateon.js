@@ -65,16 +65,13 @@ String.prototype.replaceAll = function(str1, str2){
 
 // 친구가 상태변경 되었을 때..
 function processFriendChanged(friend) {
-
 	
 	// TODO: 친구가 상태 변경.
 	var content = "";
 	var liID = friend.id.replaceAll(/[^a-zA-Z0-9_]/,"");
-		
+	
 	var targetLi = document.getElementById(liID);
 	var targetLu = document.getElementById('group_' + friend.group);
-	
-	
 	
 	if(targetLi == null){
 		//새로 생성 하기  끝에 붙임
@@ -84,7 +81,6 @@ function processFriendChanged(friend) {
 	    targetLi = newLi;
 	    targetLi.id = liID;
 	}
-	
 	
 	
 	switch(friend.status){

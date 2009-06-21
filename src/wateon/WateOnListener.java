@@ -3,15 +3,19 @@ package wateon;
 import java.util.ArrayList;
 import java.util.Properties;
 
-import wateon.entity.Message;
 import wateon.entity.ChatRoom;
+import wateon.entity.Message;
 
-import kfmes.natelib.*;
-import kfmes.natelib.entity.*;
+import kfmes.natelib.SwitchBoardSession;
+import kfmes.natelib.entity.GroupList;
+import kfmes.natelib.entity.NateFile;
+import kfmes.natelib.entity.NateFriend;
 import kfmes.natelib.event.NateListener;
-import kfmes.natelib.ftp.*;
-import kfmes.natelib.msg.*;
-import kfmes.natelib.util.*;
+import kfmes.natelib.ftp.FileRecver;
+import kfmes.natelib.ftp.FileSender;
+import kfmes.natelib.msg.InstanceMessage;
+import kfmes.natelib.msg.MimeMessage;
+import kfmes.natelib.util.MsgUtil;
 
 public class WateOnListener implements NateListener {
 	private WateOnUser self;
@@ -38,7 +42,8 @@ public class WateOnListener implements NateListener {
 
 	@Override
 	public void buddyListModified() {
-		// TODO: 친구 목록이 변경 되었음.
+		//친구 이름 변하면 여기서 나타남////////
+		
 	}
 
 
@@ -47,6 +52,7 @@ public class WateOnListener implements NateListener {
 	public void buddyModified(NateFriend friend) {
 		//System.out.println("친구 상태 변경: " + friend.getID());
 		self.addFriendModified(friend);
+
 	}
 
 
@@ -91,7 +97,6 @@ public class WateOnListener implements NateListener {
 
 	@Override
 	public void disConnected() {
-		self.logout();
 	}
 
 	@Override
@@ -146,13 +151,11 @@ public class WateOnListener implements NateListener {
 	}
 
 	@Override
-	public void listAdd(NateFriend friend) {
-		// TODO: 친구 추가??
+	public void listAdd(NateFriend arg0) {
 	}
 
 	@Override
-	public void listOnline(NateFriend friend) {
-		// 구현할 필요없음. buddyModified() 에서 해결 됨.
+	public void listOnline(NateFriend arg0) {
 	}
 
 	@Override
@@ -165,7 +168,6 @@ public class WateOnListener implements NateListener {
 
 	@Override
 	public void logoutNotify() {
-		// TODO: 딴데서 로그인해서, 로그아웃.
 	}
 
 	@Override
@@ -173,16 +175,12 @@ public class WateOnListener implements NateListener {
 	}
 
 	@Override
-	public void progressTyping(SwitchBoardSession session, NateFriend friend, int typingNow) {
-		//System.out.println(friend.getNateID() + " : " + typingNow);
-		ChatRoom room = self.getChatRoom(friend.getNateID());
-		if (room != null)
-			room.addTyping(friend, typingNow == 1);
+	public void progressTyping(SwitchBoardSession arg0, NateFriend arg1,
+			int arg2) {
 	}
 
 	@Override
-	public void renameNotify(NateFriend friend) {
-		// TODO: 친구가 대화명 변경했음.
+	public void renameNotify(NateFriend arg0) {
 	}
 
 	@Override
@@ -190,41 +188,34 @@ public class WateOnListener implements NateListener {
 	}
 
 	@Override
-	public void switchboardSessionEnded(SwitchBoardSession session) {
-		// 채팅방 끝났음.
+	public void switchboardSessionEnded(SwitchBoardSession arg0) {
 	}
 
 	@Override
-	public void switchboardSessionStarted(SwitchBoardSession session) {
-		// 채팅방 시작했음.
+	public void switchboardSessionStarted(SwitchBoardSession arg0) {
 	}
 
 	@Override
-	public void userOffline(NateFriend friend) {
-		// 구현할 필요없음. buddyModified() 에서 해결 됨.
+	public void userOffline(NateFriend arg0) {
 	}
 
 	@Override
-	public void userOnline(NateFriend friend) {
-		// 구현할 필요없음. buddyModified() 에서 해결 됨.
+	public void userOnline(NateFriend arg0) {
 	}
 
 	@Override
-	public void whoAddedMe(NateFriend friend) {
-		// TODO: 누가 날 친구추가 했음.
+	public void whoAddedMe(NateFriend arg0) {
 	}
 
 	@Override
-	public void whoJoinSession(SwitchBoardSession session, NateFriend friend) {
-		// TODO: 누가 대화방에 난입?
+	public void whoJoinSession(SwitchBoardSession arg0, NateFriend arg1) {
 	}
 
 	@Override
-	public void whoPartSession(SwitchBoardSession session, NateFriend friend) {
+	public void whoPartSession(SwitchBoardSession arg0, NateFriend arg1) {
 	}
 
 	@Override
-	public void whoRemovedMe(NateFriend friend) {
-		// TODO: 누가 날 제거?;; (친구 삭제 말하는건가??)
+	public void whoRemovedMe(NateFriend arg0) {
 	}
 }
