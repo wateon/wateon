@@ -113,17 +113,17 @@
 		String groupName = group.getName();
 		String status = null; 
 		String liID = null;
-		String groupNo = "group_" + groupName;
+		String groupId = "group_" + wateon.WateonUtil.generateGroupId(groupName);
 		
 		out.println("<ul>");
 		out.println("<li>");
-		out.println("<h3 onclick=\"javascript: $('#" + groupNo + "')" + 
+		out.println("<h3 onclick=\"javascript: $('#" + groupId + "')" + 
 				".slideToggle('fast', function(){" +
-					"$('#listImage_" + groupNo + "').attr('src', ($('#" + groupNo + " li').size() > 0) ? " + 
-					"(($('#" + groupNo + "').children().is(':hidden')) ? " +
+					"$('#listImage_" + groupId + "').attr('src', ($('#" + groupId+ " li').size() > 0) ? " + 
+					"(($('#" + groupId + "').children().is(':hidden')) ? " +
 					"'image/plus.gif' : 'image/minus.gif') : 'image/blank.gif');" +
 					"});\">");
-		out.println("<img id=\"listImage_" + groupNo + "\" src=\"");
+		out.println("<img id=\"listImage_" + groupId + "\" src=\"");
 		int size = 0;
 		for (NateFriend aUser : group.getList()) {
 			if (aUser.getStatus().equals("F") == false)
@@ -140,7 +140,7 @@
 		out.println("<input type='button' onclick='modifyGroup(\"" + groupName + "\")' value='변경'>");
 		out.println("</h3>");
 	
-		out.println("<ul id=\"" + groupNo + "\">");
+		out.println("<ul id=\"" + groupId + "\">");
 		
 		for (NateFriend user : group.getList()) {
 			status = user.getStatus();
@@ -170,7 +170,7 @@
 						%>
 					</a>
 					<a href="./main.jsp"
-						onclick="javascript:popUpCenter('imessage.jsp?targetId=<%=user.getID() %>', '쪽지', 500, 255); return false;">
+						onclick="javascript:popUpCenter('imessage.jsp?targetId=<%=user.getID() %>', '쪽지', 300, 200); return false;">
 						&lt;쪽지&gt;
 					</a>
 					<a href="#" onclick="deleteFriend('<%=user.getID()%>')">(삭제)</a>

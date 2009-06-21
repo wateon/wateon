@@ -26,12 +26,13 @@
 	<br />
 	
 	<form name="Login" action="login.do" method="post">
+	
 		<label for="id">아이디 : </label>
-		<input id="id" name="id" type="text" size="25" value="gsk1047@nate.com" onfocus="deleteValue('id')">
+		<input id="id" name="id" type="text" size="25" value="" onfocus="deleteValue('id')">
 		<br />
 		
 		<label for="password">비밀번호 : </label>
-		<input id="password" name="password" type="password" size="27" value="tjsrua" onfocus="deleteValue('password')">
+		<input id="password" name="password" type="password" size="27" value="" onfocus="deleteValue('password')">
 		<br />
 		
 		<input type="submit" value="Log in">

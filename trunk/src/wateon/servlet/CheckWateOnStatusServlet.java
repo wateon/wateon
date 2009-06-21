@@ -16,6 +16,7 @@ import org.json.simple.JSONObject;
 
 import wateon.WateOn;
 import wateon.WateOnUser;
+import wateon.WateonUtil;
 
 public class CheckWateOnStatusServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -98,7 +99,7 @@ public class CheckWateOnStatusServlet extends HttpServlet {
 			
 			JSONObject f = new JSONObject();
 			f.put(TYPE, FRIEND_CHANGED);
-			f.put("group", friend.getGroup().getName());			
+			f.put("group", WateonUtil.generateGroupId(friend.getGroup().getName()));			
 			f.put("id", friend.getID());
 			f.put("name", friend.getRealName());
 			f.put("nick", friend.getNickName());

@@ -27,7 +27,6 @@ function setNickName() {
 	if (newNickName){
 		$.post("myStatus.do", {newNickName: newNickName, action: "nickName"});
 		document.all.myNickName.value=newNickName;
-	}else
-		alert("닉네임이 올바르지 않습니다.");
+	}
 }
 
