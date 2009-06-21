@@ -66,6 +66,9 @@
 				<img src="image/wateon_logo_small.gif">				
 				</td>
 				<td align="center">
+				<a href="chatbox.do" target="_blank">ChatBox</a>
+				</td>
+				<td align="center">
 				<a href="logout.do">Logout</a>
 				</td>
 			</tr>
