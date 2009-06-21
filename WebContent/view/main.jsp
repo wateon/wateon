@@ -4,9 +4,6 @@
 	List<NateGroup> groups = (List<NateGroup>)request.getAttribute("groups");
 	NateFriend myself = (NateFriend)request.getAttribute("myself");
 	
-	
-	
-	
 	String myCyworld = (String) request.getAttribute("cyworldUrl");
 	String myEmail = myself.getEmail();
 	
@@ -111,19 +108,37 @@
 	<br />
 	<div class="friend_list">
 <%
+	int no = 0;
 	for (NateGroup group : groups) {
 		String groupName = group.getName();
+		String groupNo = "group_" + no++;
 		
 		out.println("<ul>");
 		out.println("<li>");
-		out.println("<h3 onclick=\"javascript: $('#group_" + groupName + "').slideToggle('fast');\">");
+		out.println("<h3 onclick=\"javascript: $('#" + groupNo + "')" + 
+				".slideToggle('fast', function(){" +
+					"$('#listImage_" + groupNo + "').attr('src', ($('#" + groupNo + " li').size() > 0) ? " + 
+					"(($('#" + groupNo + "').children().is(':hidden')) ? " +
+					"'image/plus.gif' : 'image/minus.gif') : 'image/blank.gif');" +
+					"});\">");
+		out.println("<img id=\"listImage_" + groupNo + "\" src=\"");
+		int size = 0;
+		for (NateFriend aUser : group.getList()) {
+			if (aUser.getStatus().equals("F") == false)
+				size++;
+		}
+		
+		if (size > 0)
+			out.println("image/plus.gif\">");
+		else
+			out.println("image/blank.gif\">");
+		
 		out.println(groupName);
 		out.println("<input type='button' onclick='deleteGroup(\"" + groupName + "\")' value='삭제'>");
 		out.println("<input type='button' onclick='modifyGroup(\"" + groupName + "\")' value='변경'>");
 		out.println("</h3>");
-		
-		out.println("<ul id=\"group_" + groupName + "\">");
-		
+	
+		out.println("<ul id=\"" + groupNo + "\">");
 		
 		for (NateFriend user : group.getList()) {
 			if (user.getStatus().equals("F") == false) {
