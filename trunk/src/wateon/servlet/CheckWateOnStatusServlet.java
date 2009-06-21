@@ -95,11 +95,16 @@ public class CheckWateOnStatusServlet extends HttpServlet {
 
 		// 그동안, 상태가 변경된 친구들..
 		for (NateFriend friend : myself.getAllFriendModified()) {
+			
 			JSONObject f = new JSONObject();
 			f.put(TYPE, FRIEND_CHANGED);
+			f.put("group", friend.getGroup().getName());			
 			f.put("id", friend.getID());
+			f.put("name", friend.getRealName());
 			f.put("nick", friend.getNickName());
 			f.put("status", friend.getStatus());
+			
+			
 			// TODO: 등등 필요한 정보를 넘겨준다.
 			
 			results.add(f);

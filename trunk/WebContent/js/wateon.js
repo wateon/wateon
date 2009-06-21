@@ -49,10 +49,71 @@ function processNewChat(chat) {
 	popUpChat(chat.targetId);
 }
 
+String.prototype.replaceAll = function(str1, str2){
+	var temp = this;
+ 	while (true)
+ 	{
+ 		if( temp.match(str1) ){
+ 			temp = temp.replace(str1, str2);
+ 		}else
+ 			break;
+ 	}
+ 	return temp;
+}
+
+
+
 // 친구가 상태변경 되었을 때..
 function processFriendChanged(friend) {
+
+	
 	// TODO: 친구가 상태 변경.
-	//alert("[친구 상태 변경]" + friend.id + "\n" + friend.nick + "\n" + friend.status);
+	var content = "";
+	var liID = friend.id.replaceAll(/[^a-zA-Z0-9_]/,"");
+		
+	var targetLi = document.getElementById(liID);
+	var targetLu = document.getElementById('group_' + friend.group);
+	
+	
+	
+	if(targetLi == null){
+		//새로 생성 하기  끝에 붙임
+		var newLi = document.createElement('LI');
+	    var idx = targetLu.children.length-1;
+	    targetLu.children(idx).insertAdjacentElement('afterEnd', newLi);
+	    targetLi = newLi;
+	    targetLi.id = liID;
+	}
+	
+	
+	
+	switch(friend.status){
+	case "F":
+		eval("targetLu.removeChild(" + liID + ");");
+		return;
+	case "O":
+		content += 	"<img src='image/wateon_state_1.gif'>";
+		break;
+	case "A":
+		content += 	"<img src='image/wateon_state_2.gif'>";
+		break;
+	case "B":
+		content += 	"<img src='image/wateon_state_3.gif'>";
+		break;
+	case "P":
+		content += 	"<img src='image/wateon_state_3.gif'>";
+		break;
+	case "M":
+		content += 	"<img src='image/wateon_state_2.gif'>";
+		break;
+	}
+	
+	content += "<a href='chat.do?targetId=" + friend.id + "' onclick=\"javascript:popUpChat('" + friend.id + "'); return false;\">" + friend.name + "(" + friend.nick + ")" + "</a>";
+	content += "<a href='./main.jsp' onclick=\"javascript:popUpCenter('imessage.jsp?targetId=" + friend.id + "', '쪽지', 500, 255); return false;\"> &lt;쪽지&gt; </a>";
+	content += "<a href='#' onclick=\"deleteFriend('" + friend.id + "');\">(삭제)</a>";
+	content += "<a href='#' onclick=\"banFriend('" + friend.id + "');\">(차단)</a>";
+	
+	$("#"+liID).html(content);
 }
 
 // 계속 상태 변화를 체크한다.
