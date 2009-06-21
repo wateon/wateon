@@ -44,7 +44,7 @@
 					<td width='81'
 						style='border-top-width: 1; border-right-width: 2; border-bottom-width: 2; border-left-width: 1; border-top-style: none; border-right-style: solid; border-bottom-style: solid; border-left-style: none;'
 						onClick= 'javascript:document.all.imessage.submit();javascript:window.close();'>
-					<p align='center'><span style='font-size: 10pt;'>답장</span></p>
+					<p align='center'><span style='font-size: 10pt;'>보내기</span></p>
 					</td>
 				</tr>
 			</table>

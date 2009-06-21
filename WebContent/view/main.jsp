@@ -111,7 +111,9 @@
 	int no = 0;
 	for (NateGroup group : groups) {
 		String groupName = group.getName();
-		String groupNo = "group_" + no++;
+		String status = null; 
+		String liID = null;
+		String groupNo = "group_" + groupName;
 		
 		out.println("<ul>");
 		out.println("<li>");
@@ -141,12 +143,31 @@
 		out.println("<ul id=\"" + groupNo + "\">");
 		
 		for (NateFriend user : group.getList()) {
-			if (user.getStatus().equals("F") == false) {
-				out.println("<li>");
+			status = user.getStatus();
+			if (status.equals("F") == false) {
+				liID = user.getNameID().replaceAll("\\W","");
+				out.println("<li id='"+liID+"'>");				
+				if(status.equals("O"))
+					out.println("<img src='image/wateon_state_1.gif'>");
+				else if(status.equals("A"))
+					out.println("<img src='image/wateon_state_2.gif'>");
+				else if(status.equals("B"))
+					out.println("<img src='image/wateon_state_3.gif'>");
+				else if(status.equals("P"))
+					out.println("<img src='image/wateon_state_3.gif'>");
+				else if(status.equals("M"))
+					out.println("<img src='image/wateon_state_2.gif'>");
 %>
 					<a href="chat.do?targetId=<%=user.getID()%>"
 						onclick="javascript:popUpChat('<%=user.getID()%>'); return false;">
-						<%= user.getNameNick() %>
+						<%
+							final int MAX_NICK_LENGTH = 17;
+							if (user.getNameNick().length() > MAX_NICK_LENGTH)
+								out.print(user.getNameNick().substring(0,MAX_NICK_LENGTH) + "...");
+							else
+								out.print(user.getNameNick());
+							
+						%>
 					</a>
 					<a href="./main.jsp"
 						onclick="javascript:popUpCenter('imessage.jsp?targetId=<%=user.getID() %>', '쪽지', 500, 255); return false;">
@@ -167,12 +188,3 @@
 	
 </body>
 </html>
-
-
-
-
-
-
-
-
-
