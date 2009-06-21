@@ -157,3 +157,18 @@ function popUpCyworld(url){
 	window.open(url, 'Register', 'top=300, left=500 width=950, height=600, scrollbar=no');
 }
 
+
+function slideToggle(groupId) {
+	var groupSelector = '#' + groupId;
+	
+	$(groupSelector).slideToggle('fast', function() {
+		var value = null;
+		
+		if ($(groupSelector + ' li').size() > 0)
+			value = $(groupSelector).children().is(':hidden') ? 'image/plus.gif' : 'image/minus.gif';
+		else
+			value = 'image/blank.gif';
+		
+		$('#listImage_' + groupId).attr('src', value);
+	});
+}

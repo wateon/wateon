@@ -117,12 +117,7 @@
 		
 		out.println("<ul>");
 		out.println("<li>");
-		out.println("<h3 onclick=\"javascript: $('#" + groupId + "')" + 
-				".slideToggle('fast', function(){" +
-					"$('#listImage_" + groupId + "').attr('src', ($('#" + groupId+ " li').size() > 0) ? " + 
-					"(($('#" + groupId + "').children().is(':hidden')) ? " +
-					"'image/plus.gif' : 'image/minus.gif') : 'image/blank.gif');" +
-					"});\">");
+		out.println("<h3 onclick='javascript:slideToggle(\"" + groupId + "\");'>");
 		out.println("<img id=\"listImage_" + groupId + "\" src=\"");
 		int size = 0;
 		for (NateFriend aUser : group.getList()) {
