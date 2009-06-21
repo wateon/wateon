@@ -1,5 +1,7 @@
 package wateon;
 
+import java.io.UnsupportedEncodingException;
+
 
 public class WateonUtil {
 	public static String generateGroupId(String input) {
@@ -66,7 +68,13 @@ class Base64Coder {
 	 * @return A String with the Base64 encoded data.
 	 */
 	public static String encodeString(String s) {
-		return new String(encode(s.getBytes()));
+		String encoded = null;
+		try {
+			encoded = new String(encode(s.getBytes("UTF-8")));
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+		return encoded;
 	}
 
 	/**
