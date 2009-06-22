@@ -7,6 +7,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import wateon.DB.MessageDAO;
+import wateon.DB.MessageDTO;
 import wateon.entity.ChatRoom;
 import kfmes.natelib.NateonMessenger;
 import kfmes.natelib.SwitchBoardSession;
@@ -126,7 +128,7 @@ public class WateOnUser {
 			return false;
 		
 		// 생성된 채팅방 인스턴스를 목록에 추가한다.
-		chatRooms.put(targetId, new ChatRoom(targetId, chatSession));
+		chatRooms.put(targetId, new ChatRoom(this, targetId, chatSession));
 		return true;
 	}
 
@@ -136,6 +138,8 @@ public class WateOnUser {
 	 */
 	public void addInstanceMessage(InstanceMessage imessage) {
 		synchronized (instanceMessageQ) {
+			MessageDTO dto = new MessageDTO(imessage.getFrom(), id, imessage.getMessage());
+			new MessageDAO().insertIMessage(dto);
 			instanceMessageQ.add(imessage);
 		}
 	}
@@ -204,7 +208,7 @@ public class WateOnUser {
 	 */
 	public ChatRoom setChatSession(String targetId, SwitchBoardSession session) {
 		if (hasChatRoom(targetId) == false)
-			chatRooms.put(targetId, new ChatRoom(targetId, session));
+			chatRooms.put(targetId, new ChatRoom(this, targetId, session));
 		return getChatRoom(targetId);
 	}
 
