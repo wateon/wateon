@@ -5,9 +5,9 @@ import java.sql.*;
 public class DBConnector {
 	
 	private Connection conn;
-	private String connStr = "jdbc:mysql://localhost:3306/wateon";
-	private String id = "root";
-	private String password = "1234";
+	private String connStr = "jdbc:mysql://localhost:3307/mashdown";
+	private String id = "mashdown";
+	private String password = "wd1212";
 	
 	public void connect() {
 		
