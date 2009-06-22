@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="kfmes.natelib.entity.*, kfmes.natelib.util.*, java.util.List" %>
 <%
+@SuppressWarnings("unchecked")
 	List<NateGroup> groups = (List<NateGroup>)request.getAttribute("groups");
 	NateFriend myself = (NateFriend)request.getAttribute("myself");
 	
