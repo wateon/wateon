@@ -14,8 +14,3 @@ function deleteFriend(friendId) {
 		$.post("friend.do", {friendId : friendId, action : "delete"} );
 }
 
-function banFriend(friendId) {
-	var answer = confirm("차단하시겠습니까");
-	if (answer)
-		$.post("friend.do", {friendId : friendId, action : "ban"} );
-}

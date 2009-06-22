@@ -147,7 +147,7 @@ public class MessageDAO {
 
 		MessageDTO dto;
 		Vector<MessageDTO> v = new Vector<MessageDTO>();
-		String query = "select number, sender, receiver, message, date from message where sender=?";
+		String query = "select number, sender, receiver, message, date from message where sender=? or receiver=?";
 
 		conn = new DBConnector().getConnection();
 		
@@ -158,6 +158,7 @@ public class MessageDAO {
 
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, sender);
+			pstmt.setString(2, sender);
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
 				

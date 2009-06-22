@@ -15,6 +15,13 @@ public class MessageDTO {
 		this.message = message;
 		this.date = date;
 	}
+
+	public MessageDTO(String sender, String receiver, String message) {
+		this.sender = sender;
+		this.receiver = receiver;
+		this.message = message;
+	}
+
 	
 	public String getSender() {
 		return sender;

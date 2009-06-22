@@ -16,6 +16,8 @@ import kfmes.natelib.util.MsgUtil;
 
 import wateon.WateOn;
 import wateon.WateOnUser;
+import wateon.DB.MessageDAO;
+import wateon.DB.MessageDTO;
 import wateon.entity.ChatRoom;
 
 public class SendMessageServlet extends HttpServlet {
@@ -90,6 +92,8 @@ public class SendMessageServlet extends HttpServlet {
 		}
 		
 		String json = JSONValue.toJSONString(result);
+		MessageDTO dto = new MessageDTO(id, targetId, message);
+		new MessageDAO().insertMessage(dto);
 		writer.println(json);
 	}
 

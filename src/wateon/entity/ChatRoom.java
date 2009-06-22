@@ -4,6 +4,10 @@ import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
+import wateon.WateOnUser;
+import wateon.DB.MessageDAO;
+import wateon.DB.MessageDTO;
+
 import kfmes.natelib.SwitchBoardSession;
 import kfmes.natelib.entity.NateFriend;
 import kfmes.natelib.util.MsgUtil;
@@ -18,8 +22,11 @@ public class ChatRoom {
 
 	private String typingMessage = "";
 
-	public ChatRoom(String targetId, SwitchBoardSession session) {
+	private WateOnUser self;
+
+	public ChatRoom(WateOnUser self, String targetId, SwitchBoardSession session) {
 		receivedMessageQ = new LinkedList<Message>();
+		this.self = self;
 		this.targetId = targetId;
 		this.session = session;
 		lasttime = new Date();
@@ -47,6 +54,8 @@ public class ChatRoom {
 	 */
 	public synchronized void addNewMessage(Message msg) {
 		receivedMessageQ.add(msg);
+		MessageDTO dto = new MessageDTO(msg.getId(), self.getId(), msg.getMessage());
+		new MessageDAO().insertMessage(dto);
 		addTyping(null, false);
 	}
 
@@ -80,7 +89,7 @@ public class ChatRoom {
 
 	public void addTyping(NateFriend friend, boolean typing) {
 		if (typing)
-			typingMessage = "글을 쓰고 있습니다: " + MsgUtil.getRealString(friend.getNickName());
+			typingMessage = "Typing : " + MsgUtil.getRealString(friend.getNickName());
 		else
 			typingMessage = "";
 	}

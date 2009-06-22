@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import wateon.WateOn;
 import wateon.WateOnUser;
+import wateon.DB.MessageDAO;
+import wateon.DB.MessageDTO;
 
 import kfmes.natelib.msg.InstanceMessage;
 
@@ -37,6 +39,8 @@ public class SendInstanceMessageServlet extends HttpServlet {
 		myself.updateTime();
 		
 		InstanceMessage msg = new InstanceMessage(senderId, targetId, message);
+		MessageDTO dto = new MessageDTO(senderId, targetId, message);
+		new MessageDAO().insertIMessage(dto);
 		myself.getNateonMessenger().sendIMessage(msg);
 	}
 }

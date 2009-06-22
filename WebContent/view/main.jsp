@@ -172,7 +172,6 @@
 						&lt;쪽지&gt;
 					</a>
 					<a href="#" onclick="deleteFriend('<%=user.getID()%>')">(삭제)</a>
-					<a href="#" onclick="banFriend('<%=user.getID()%>')">(차단)</a>
 <%
 				out.println("</li>");
 			}

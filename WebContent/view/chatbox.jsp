@@ -46,7 +46,6 @@
 				out.print("<td align='center'>"+dto.getMessage().substring(0,5)+"</td>");
 			}
 			out.print("<td align='center'>"+dto.getDate()+"</td>");
-			out.print("<td><a href='#'>"+" - Show detail - "+"</a></td>");
 			out.print("</tr>");
 		}
 	}
