@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="java.util.*, wateon.DB.* " %>
 <%
+	@SuppressWarnings("unchecked")
 	Vector<MessageDTO> v = (Vector<MessageDTO>)request.getAttribute("v");
 	String id = (String)request.getSession().getAttribute("id");
 %>
