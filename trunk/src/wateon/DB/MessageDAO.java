@@ -26,9 +26,8 @@ public class MessageDAO {
 			System.out.println(sqle.getMessage());		
 		} finally {
 			try {
-				conn.close();
+				if(conn!=null)conn.close();
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
@@ -56,9 +55,8 @@ public class MessageDAO {
 			System.out.println(sqle.getMessage());		
 		} finally {
 			try {
-				conn.close();
+				if(conn!=null)conn.close();
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
@@ -73,7 +71,7 @@ public class MessageDAO {
 
 		MessageDTO dto;
 		Vector<MessageDTO> v = new Vector<MessageDTO>();
-		String query = "select number, sender, receiver, message, date from imessage where sender="+sender;
+		String query = "select number, sender, receiver, message, date from imessage where sender=?";
 
 		conn = new DBConnector().getConnection();
 		
@@ -83,6 +81,7 @@ public class MessageDAO {
 		try {
 
 			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, sender);
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
 				
@@ -92,15 +91,13 @@ public class MessageDAO {
 			}
 
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
 			try {
-				rs.close();
-				pstmt.close();
-				conn.close();
+				if(rs!=null)rs.close();
+				if(pstmt!=null)pstmt.close();
+				if(conn!=null)conn.close();
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
@@ -112,7 +109,7 @@ public class MessageDAO {
 
 		MessageDTO dto;
 		Vector<MessageDTO> v = new Vector<MessageDTO>();
-		String query = "select number, sender, receiver, message, date from imessage where receiver="+receiver;
+		String query = "select number, sender, receiver, message, date from imessage where receiver=?";
 
 		conn = new DBConnector().getConnection();
 		
@@ -122,6 +119,7 @@ public class MessageDAO {
 		try {
 
 			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, receiver);
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
 				
@@ -131,15 +129,13 @@ public class MessageDAO {
 			}
 
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
 			try {
-				rs.close();
-				pstmt.close();
-				conn.close();
+				if(rs!=null)rs.close();
+				if(pstmt!=null)pstmt.close();
+				if(conn!=null)conn.close();
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
@@ -151,7 +147,7 @@ public class MessageDAO {
 
 		MessageDTO dto;
 		Vector<MessageDTO> v = new Vector<MessageDTO>();
-		String query = "select number, sender, receiver, message, date from message where sender="+sender;
+		String query = "select number, sender, receiver, message, date from message where sender=?";
 
 		conn = new DBConnector().getConnection();
 		
@@ -161,6 +157,7 @@ public class MessageDAO {
 		try {
 
 			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, sender);
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
 				
@@ -170,15 +167,13 @@ public class MessageDAO {
 			}
 
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
 			try {
-				rs.close();
-				pstmt.close();
-				conn.close();
+				if(rs!=null)rs.close();
+				if(pstmt!=null)pstmt.close();
+				if(conn!=null)conn.close();
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
@@ -197,14 +192,12 @@ public class MessageDAO {
 			pstmt.setInt(1, num);
 			pstmt.execute();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
 			try {
-				pstmt.close();
-				conn.close();
+				if(pstmt!=null)pstmt.close();
+				if(conn!=null)conn.close();
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
@@ -221,14 +214,12 @@ public class MessageDAO {
 			pstmt.setInt(1, num);
 			pstmt.execute();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
 			try {
-				pstmt.close();
-				conn.close();
+				if(pstmt!=null)pstmt.close();
+				if(conn!=null)conn.close();
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}

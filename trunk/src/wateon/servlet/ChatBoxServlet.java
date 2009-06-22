@@ -37,11 +37,12 @@ public class ChatBoxServlet extends HttpServlet {
 	}
 	
 	private void call(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+		request.setCharacterEncoding("UTF-8");
+		response.setCharacterEncoding("UTF-8");
 		dao = new MessageDAO();
 
 		String type = request.getParameter("type");
-		String id = request.getParameter("id");
+		String id = (String)request.getSession().getAttribute("id");
 		String url = "/view/chatbox.jsp";
 		
 		if(type!=null) {
@@ -66,6 +67,7 @@ public class ChatBoxServlet extends HttpServlet {
 
 			request.setAttribute("v", v);
 		}
+
 		RequestDispatcher dispatcher = request.getRequestDispatcher(url);
 		dispatcher.forward(request, response);
 	}

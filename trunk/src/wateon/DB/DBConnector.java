@@ -5,7 +5,7 @@ import java.sql.*;
 public class DBConnector {
 	
 	private Connection conn;
-	private String connStr = "jdbc:mysql://localhost:3306/ryunny";
+	private String connStr = "jdbc:mysql://localhost:3306/wateon";
 	private String id = "root";
 	private String password = "1234";
 	
