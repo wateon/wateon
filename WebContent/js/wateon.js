@@ -19,7 +19,6 @@ function popUpChat(targetId) {
 //Comment	: 메시지를 입력받아 새로운창을 뛰어서 메시지를 뿌려준다.
 /////////////////////////////////////////////////////////////////////////////////////////
 function MessageBox(strMessage){
-
 	MsgWin=window.open('','','scrollbar=no,width=300, height=205,top=200,left=200');
 	MsgWin.document.write("<html><head><meta http-equiv='content-type' content='text/html; charset=euc-kr'> <title>WateOn Message</title> <meta name='generator' content='Namo WebEditor v6.0'> </head> <body bgcolor='white' text='black' link='blue' vlink='purple' alink='red' leftmargin=0 topmargin=0> <TABLE height=200 cellSpacing=1 cellPadding=0 width=300 bgColor=#85bee0 border=0>  <TBODY>  <TR>   <TD align=middle width=300 bgColor=#e7f3f5 height=50>    <p>  <b><font color='#AEAEFF'><span style='font-size:12pt;'>▒</span></font></b><font color='#0000CC'><span style='font-size:12pt;'><b>&nbsp; Message Box&nbsp;</b></span></font> <b><font color='#AEAEFF'><span style='font-size:12pt;'>▒</span></font></b></p> </TD></TR>  <TR>   <TD align=middle width=300 bgColor=#f4fafb height=100><span style='font-size:10pt;'>"+strMessage+"</span> </TD></TD>  </tr>  <TR>   <TD align=middle width=300 bgColor=#f4fafb height=50>    <table border='1' width='91' style='border-top-width:1; border-left-width:1; border-top-color:rgb(133,190,224); border-left-color:rgb(133,190,224); border-top-style:none; border-left-style:none;'>     <tr>      <td width='81' style='border-top-width:1; border-right-width:2; border-bottom-width:2; border-left-width:1; border-top-style:none; border-right-style:solid; border-bottom-style:solid; border-left-style:none;' onClick='javascript:window.close();'>      <p align='center'><span style='font-size:10pt;'>Close</span></p> </td>     </tr>    </table> </TD></TR></TBODY></TABLE><p>&nbsp;</p> </body> </html>");
 }
@@ -31,17 +30,14 @@ function MessageBox(strMessage){
 //Comment	: 메시지를 입력받아 새로운창을 뛰어서 메시지를 뿌려준다.
 /////////////////////////////////////////////////////////////////////////////////////////
 function ReceivedMessageBox(strName, strFrom, strMessage){
-
-MsgWin=window.open('','','scrollbar=no,width=300, height=205,top=200,left=200');
-MsgWin.document.write("<html> <head> <meta http-equiv='content-type' content='text/html; charset=euc-kr'> <title>WateOn Message</title> </head> <script language='javascript'> 	function goSendMessage(){ 		document.location.href='imessage.jsp?targetId="+strFrom+"' 	} </script> <body bgcolor='white' text='black' link='blue' vlink='purple' 	alink='red' leftmargin=0 topmargin=0> <TABLE height=200 cellSpacing=1 cellPadding=0 width=300 bgColor=#85bee0	border=0> 	<TBODY> 		<TR> 			<TD align=middle width=300 bgColor=#e7f3f5 height=50> 			<p><font color='#0000CC'> <span style='font-size: 12pt;'> 			<b>보낸이 : "+strName+"</b> </span> </font></p> 			</TD> 		</TR> 		<TR> 			<TD align=middle width=300 bgColor=#f4fafb height=100><textarea 				style='font-size: 10pt; width: 100%; height: 100%;' readonly>"+strMessage+"</textarea></TD> 			</TD> 		</tr> 		<TR> 			<TD align=middle width=300 bgColor=#f4fafb height=50> 			<table border='1' width='91' 				style='border-top-width: 1; border-left-width: 1; border-top-color: rgb(133, 190, 224); border-left-color: rgb(133, 190, 224); border-top-style: none; border-left-style: none;'> 				<tr> 					<td width='81' 						style='border-top-width: 1; border-right-width: 2; border-bottom-width: 2; border-left-width: 1; border-top-style: none; border-right-style: solid; border-bottom-style: solid; border-left-style: none;' 						onClick= 'javascript: goSendMessage();'> 					<p align='center'><span style='font-size: 10pt;'>답장</span></p> 					</td> 				</tr> 			</table> 			</TD> 		</TR> 	</TBODY> </TABLE> </body> </html>");
+	MsgWin=window.open('','','scrollbar=no,width=300, height=205,top=200,left=200');
+	MsgWin.document.write("<html> <head> <meta http-equiv='content-type' content='text/html; charset=euc-kr'> <title>WateOn Message</title> </head> <script language='javascript'> 	function goSendMessage(){ 		document.location.href='imessage.jsp?targetId="+strFrom+"' 	} </script> <body bgcolor='white' text='black' link='blue' vlink='purple' 	alink='red' leftmargin=0 topmargin=0> <TABLE height=200 cellSpacing=1 cellPadding=0 width=300 bgColor=#85bee0	border=0> 	<TBODY> 		<TR> 			<TD align=middle width=300 bgColor=#e7f3f5 height=50> 			<p><font color='#0000CC'> <span style='font-size: 12pt;'> 			<b>보낸이 : "+strName+"</b> </span> </font></p> 			</TD> 		</TR> 		<TR> 			<TD align=middle width=300 bgColor=#f4fafb height=100><textarea 				style='font-size: 10pt; width: 100%; height: 100%;' readonly>"+strMessage+"</textarea></TD> 			</TD> 		</tr> 		<TR> 			<TD align=middle width=300 bgColor=#f4fafb height=50> 			<table border='1' width='91' 				style='border-top-width: 1; border-left-width: 1; border-top-color: rgb(133, 190, 224); border-left-color: rgb(133, 190, 224); border-top-style: none; border-left-style: none;'> 				<tr> 					<td width='81' 						style='border-top-width: 1; border-right-width: 2; border-bottom-width: 2; border-left-width: 1; border-top-style: none; border-right-style: solid; border-bottom-style: solid; border-left-style: none;' 						onClick= 'javascript: goSendMessage();'> 					<p align='center'><span style='font-size: 10pt;'>답장</span></p> 					</td> 				</tr> 			</table> 			</TD> 		</TR> 	</TBODY> </TABLE> </body> </html>");
 }
 
 
 // 쪽지 받았을때..
 function processInstanceMessage(imsg) {
-	// TODO: 쪽지 받았음. 팝업으로 바꾸자!
 	ReceivedMessageBox(imsg.name, imsg.from , imsg.msg);
-	
 }
 
 // 채팅창 열기
@@ -49,31 +45,30 @@ function processNewChat(chat) {
 	popUpChat(chat.targetId);
 }
 
-String.prototype.replaceAll = function(str1, str2){
-	var temp = this;
- 	while (true)
- 	{
- 		if( temp.match(str1) ){
- 			temp = temp.replace(str1, str2);
- 		}else
- 			break;
- 	}
- 	return temp;
+function replaceAll(s, str1, str2) {
+	var temp = s;
+	while (true) {
+		if (temp.match(str1)) {
+			temp = temp.replace(str1, str2);
+		}
+		else {
+			break;
+		}
+	}
+	return temp;
 }
 
 
 
 // 친구가 상태변경 되었을 때..
 function processFriendChanged(friend) {
-	
-	// TODO: 친구가 상태 변경.
 	var content = "";
-	var liID = friend.id.replaceAll(/[^a-zA-Z0-9_]/,"");
+	var liID = replaceAll(friend.id, /[^a-zA-Z0-9_]/, "");
 	
 	var targetLi = document.getElementById(liID);
 	var targetLu = document.getElementById('group_' + friend.group);
 	
-	if(targetLi == null){
+	if (targetLi == null) {
 		//새로 생성 하기  끝에 붙임
 		var newLi = document.createElement('LI');
 	    var idx = targetLu.children.length-1;
@@ -83,24 +78,24 @@ function processFriendChanged(friend) {
 	}
 	
 	
-	switch(friend.status){
+	switch (friend.status) {
 	case "F":
 		eval("targetLu.removeChild(" + liID + ");");
 		return;
 	case "O":
-		content += 	"<img src='image/wateon_state_1.gif'>";
+		content += "<img src='image/wateon_state_1.gif'>";
 		break;
 	case "A":
-		content += 	"<img src='image/wateon_state_2.gif'>";
+		content += "<img src='image/wateon_state_2.gif'>";
 		break;
 	case "B":
-		content += 	"<img src='image/wateon_state_3.gif'>";
+		content += "<img src='image/wateon_state_3.gif'>";
 		break;
 	case "P":
-		content += 	"<img src='image/wateon_state_3.gif'>";
+		content += "<img src='image/wateon_state_3.gif'>";
 		break;
 	case "M":
-		content += 	"<img src='image/wateon_state_2.gif'>";
+		content += "<img src='image/wateon_state_2.gif'>";
 		break;
 	}
 	
@@ -123,8 +118,10 @@ function startCheckWateOnStatusThread() {
 		loop : function() {
 			var url = encodeURI('checkStatus.do');
 			$.getJSON(url, {}, function(json, state) {
-				if (json.result == 'success') {
+				//alert("state = " + state);
+				if (json.result == "success") {
 					var updated = json.updated;
+					//alert("야호");
 					for (var i = 0; i < updated.length; i++) {
 						var type = updated[i].type;
 						
@@ -138,13 +135,14 @@ function startCheckWateOnStatusThread() {
 						else
 							alert('error -_-');
 					}
+					//alert("으악");
 				}
 				else if (state == 'fail') {
 					alert(json.msg);
 				}
 			});
 		}
-	})
+	});
 }
 
 // 메인 윈도우를 닫으려고 할 때

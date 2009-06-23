@@ -53,7 +53,7 @@ function startCheckMessageThread(targetId) {
 				}
 			});
 		}
-	})
+	});
 }
 
 function beforeSendMessage(data, option) {
