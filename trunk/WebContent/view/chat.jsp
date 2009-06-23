@@ -18,13 +18,13 @@
 		var g_checkMessage = true;
 		
 		$(document).ready(function() {
-			startCheckMessageThread("<%= targetId %>");
 			//$(window).unload(chatWindowClose);
 			$('#send_msg').ajaxForm({
 				dataType: 'json',
 				beforeSubmit: beforeSendMessage,
 				success: successedSendMessage
 			});
+			startCheckMessageThread("<%= targetId %>");
 		});
 	</script>
 </head>

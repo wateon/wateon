@@ -1,10 +1,10 @@
 // 그룹.
 
 function createGroup() {
-	var groupName = prompt("그룹명을 입력하세요", "");
+	var inputtedGroupName = prompt("그룹명을 입력하세요", "");
 	
-	if (groupName)
-		$.post("group.do", {groupName: groupName, action: "create"});
+	if (inputtedGroupName)
+		$.post("group.do", {groupName: inputtedGroupName, action: "create"});
 	else
 		alert("그룹명을 입력하세요");
 }
@@ -16,9 +16,9 @@ function deleteGroup(groupName) {
 }
 
 function modifyGroup(groupName) {
-	var modifyGroupName = prompt("그룹명을 입력하세요", "");
-	if (modifyGroupName)
-		$.post("group.do", {groupName: groupName, modifyGroupName: modifyGroupName, action: "modify"});
+	var inputtedModifyGroupName = prompt("그룹명을 입력하세요", "");
+	if (inputtedModifyGroupName)
+		$.post("group.do", {groupName: groupName, modifyGroupName: inputtedModifyGroupName, action: "modify"});
 	else
 		alert("그룹명을 입력하세요");
 }

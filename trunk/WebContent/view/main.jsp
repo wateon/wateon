@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="kfmes.natelib.entity.*, kfmes.natelib.util.*, java.util.List" %>
 <%
-@SuppressWarnings("unchecked")
+	@SuppressWarnings("unchecked")
 	List<NateGroup> groups = (List<NateGroup>)request.getAttribute("groups");
 	NateFriend myself = (NateFriend)request.getAttribute("myself");
 	
@@ -39,9 +39,8 @@
 	<script language="javascript" type="text/javascript" src="js/friend.js"></script>
 	<script language="javascript" type="text/javascript">
 		$(document).ready(function() {
-			startCheckWateOnStatusThread();
-			$(window).unload(mainWindowClose);
-
+			//$(window).unload(mainWindowClose);
+			
 			var status = $('#myStatus').attr('value');
 			
 			if (status == "O")
@@ -56,6 +55,8 @@
 				$("#myStatusImage").attr('src', 'image/wateon_state_2.gif');
 			else if (status == "X")
 				$("#myStatusImage").attr('src', 'image/wateon_state_1.gif');
+			
+			startCheckWateOnStatusThread();
 		});
 	</script>
 </head>
