@@ -51,15 +51,12 @@ public class CheckWateOnStatusServlet extends HttpServlet {
 			// 접속기록 갱신
 			myself.updateTime();
 			
-			results.put("result", "success");
+			results.put("result", "success"); 
 			results.put("updated", dataToJson(myself));
 		}
 		
 		PrintWriter writer = response.getWriter();
 		writer.println(results.toJSONString());
-		
-		System.out.println(id + " : " + myself);
-		
 		//System.out.println(results.toJSONString());
 	}
 
