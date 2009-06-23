@@ -1,7 +1,12 @@
 // 주의: 이 파일을 포함하기 전에, jquery와 jquery.async.js 가 포함되어 있어야 함!!
 
 function scrollDown() {
-	window.scrollBy(0, window.innerHeight);
+	var totalHeight = window.innerHeight ?
+			window.scrollMaxY ?
+				window.innerHeight + window.scrollMaxY :
+				document.height :
+			document.documentElement.scrollHeight;
+	window.scrollBy(0, totalHeight);
 }
 
 function message(id, nick, msg, type) {
@@ -30,11 +35,13 @@ function startCheckMessageThread(targetId) {
 						var msg = msgs[i].msg;
 						
 						chatList.append(message(id, nick, msg, "receive"));
-						scrollDown();
 					}
 					
 					// 타이핑 하는 메시지를 보여준다.
 					$("#typing").text(json.typing);
+					
+					// 스크롤 다운
+					scrollDown();
 				}
 				else if (json.result == 'fail') {
 					g_checkMessage = false;
