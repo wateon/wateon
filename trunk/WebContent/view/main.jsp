@@ -170,7 +170,7 @@
 						%>
 					</a>
 					<a href="./main.jsp"
-						onclick="javascript:popUpCenter('imessage.jsp?targetId=<%=user.getID() %>', '쪽지', 300, 200); return false;">
+						onclick="javascript:popUpCenterImsg('imessage.jsp?targetId=<%=user.getID() %>', '쪽지', 310, 250); return false;">
 						&lt;쪽지&gt;
 					</a>
 					<a href="#" onclick="deleteFriend('<%=user.getID()%>')">(삭제)</a>

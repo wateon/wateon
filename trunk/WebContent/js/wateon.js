@@ -7,6 +7,14 @@ function popUpCenter(url, title, width, height) {
 	window.open(url, title, settings);
 }
 
+// 쪽지 창
+function popUpCenterImsg(url, title, width, height) {
+	var left = (screen.width) ? (screen.width - width) / 2 : 0;
+	var top = (screen.height) ? (screen.height - height) / 2 : 0;
+	var settings = 'top=' + top + ', left=' + left + ', width=' + width + ', height=' + height;
+	window.open(url, title, settings);
+}
+
 // 채팅창을 띄운다.
 function popUpChat(targetId) {
 	popUpCenter('chat.do?targetId=' + targetId, 'Chat', 500, 600);
@@ -119,7 +127,6 @@ function startCheckWateOnStatusThread() {
 		loop : function() {
 			var url = encodeURI('checkStatus.do');
 			$.post(url, {}, function(json, state) {
-				//alert("state = " + state);
 				if (json.result == "success") {
 					var updated = json.updated;
 					//alert("야호");
@@ -141,7 +148,7 @@ function startCheckWateOnStatusThread() {
 				else if (state == 'fail') {
 					alert(json.msg);
 				}
-			});
+			}, "json");
 		}
 	}, "json");
 }
