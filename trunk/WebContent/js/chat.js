@@ -1,7 +1,7 @@
 // 주의: 이 파일을 포함하기 전에, jquery와 jquery.async.js 가 포함되어 있어야 함!!
 
 function scrollDown() {
-	window.scrollBy(0, window.outerHeight);
+	window.scrollBy(0, window.innerHeight);
 }
 
 function message(id, nick, msg, type) {
@@ -22,7 +22,6 @@ function startCheckMessageThread(targetId) {
 			var url = encodeURI('checkMsg.do');
 			$.post(url, {"targetId": targetId}, function(json, state) {
 				if (state == 'success' && json.result == 'success') {
-					
 					// 그동안 받은 메시지를 모두 보여준다.
 					var msgs = json.messages;
 					for (var i = 0; i < msgs.length; i++) {
@@ -51,9 +50,9 @@ function startCheckMessageThread(targetId) {
 						alert(json.msg);
 					}
 				}
-			});
+			}, "json");
 		}
-	}, "json");
+	});
 }
 
 function beforeSendMessage(data, option) {
