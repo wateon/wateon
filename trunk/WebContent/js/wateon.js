@@ -107,6 +107,7 @@ function processFriendChanged(friend) {
 	$("#"+liID).html(content);
 }
 
+
 // 계속 상태 변화를 체크한다.
 function startCheckWateOnStatusThread() {
 	jQuery.whileAsync( {
@@ -117,7 +118,7 @@ function startCheckWateOnStatusThread() {
 		},
 		loop : function() {
 			var url = encodeURI('checkStatus.do');
-			$.getJSON(url, {}, function(json, state) {
+			$.post(url, {}, function(json, state) {
 				//alert("state = " + state);
 				if (json.result == "success") {
 					var updated = json.updated;
@@ -142,7 +143,7 @@ function startCheckWateOnStatusThread() {
 				}
 			});
 		}
-	});
+	}, "json");
 }
 
 // 메인 윈도우를 닫으려고 할 때

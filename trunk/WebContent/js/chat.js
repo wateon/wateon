@@ -20,7 +20,7 @@ function startCheckMessageThread(targetId) {
 		},
 		loop : function() {
 			var url = encodeURI('checkMsg.do');
-			$.getJSON(url, {"targetId": targetId}, function(json, state) {
+			$.post(url, {"targetId": targetId}, function(json, state) {
 				if (state == 'success' && json.result == 'success') {
 					
 					// 그동안 받은 메시지를 모두 보여준다.
@@ -53,7 +53,7 @@ function startCheckMessageThread(targetId) {
 				}
 			});
 		}
-	});
+	}, "json");
 }
 
 function beforeSendMessage(data, option) {

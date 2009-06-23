@@ -252,8 +252,5 @@ public class WateOnUser {
 
 	public void updateTime() {
 		lastdate = new Date();
-		
-		// FIXME: 지우자
-		System.out.println("# updated: " + lastdate);
 	}
 }

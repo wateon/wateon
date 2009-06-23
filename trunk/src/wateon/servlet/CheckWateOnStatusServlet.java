@@ -40,9 +40,6 @@ public class CheckWateOnStatusServlet extends HttpServlet {
 		
 		JSONObject results = new JSONObject();
 		
-		// FIXME: 지우자
-		System.out.println("CheckWateOnStatusServlet");
-		
 		// 내 아이디가 있는지, 로그인 된 상태인지 확인한다.
 		if (id == null || myself == null || myself.isLogged() == false) {
 			results.put("result", "fail");
