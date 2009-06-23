@@ -34,7 +34,7 @@ public class DBConnector {
 		
 		URL url = getClass().getResource("");
 		String filename = url.getPath().substring(0, url.getPath().indexOf("/WEB-INF"));
-		filename += SEPARATOR + "WEB-INF" + SEPARATOR + "wateon.properties";
+		filename = filename.replace("%20", " ") + SEPARATOR + "WEB-INF" + SEPARATOR + "wateon.properties";
 		
 		//System.out.println(filename);
 		
