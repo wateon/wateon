@@ -33,6 +33,7 @@ public class CheckWateOnStatusServlet extends HttpServlet {
 	private void call(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		response.setCharacterEncoding("UTF-8");
+		response.setHeader("Content-type", "application/json");
 		
 		String id = (String)request.getSession().getAttribute("id");
 		WateOnUser myself = WateOn.getInstance().getWateOnUser(id);
