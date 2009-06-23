@@ -23,21 +23,21 @@
 </head>
 <body bgcolor='white' text='black' link='blue' vlink='purple' alink='red' leftmargin=0 topmargin=0>
 <form action='sendIMsg.do' id='imessage' name='imessage' method='post'>
-<TABLE height=200 cellSpacing=1 cellPadding=0 width=300 bgColor=#85bee0	border=0>
+<TABLE height=200 cellSpacing=1 cellPadding=0 width=300 border=0>
 	<TBODY>
 		<TR>
-			<TD align=middle width=300 bgColor=#e7f3f5 height=50>
+			<TD align=middle width=300 height=50>
 			<p><font color='#0000CC'> <span style='font-size: 12pt;'>
 			<b>받는사람 : </b><input type='text' name='targetId' readonly='readonly' size='20' value='<%= targetId %>' /> </span> </font></p>
 			</TD>
 		</TR>
 		<TR>
-			<TD align=middle width=300 bgColor=#f4fafb height=100>
+			<TD align=middle width=300 height=100>
 			<textarea name='message' style='font-size: 10pt; width: 100%; height: 100%;' ></textarea>
 			</TD>
 		</tr>
 		<TR>
-			<TD align=middle width=300 bgColor=#f4fafb height=50>
+			<TD align=middle width=300 height=50>
 			<table border='1' width='91'
 				style='border-top-width: 1; border-left-width: 1; border-top-color: rgb(133, 190, 224); border-left-color: rgb(133, 190, 224); border-top-style: none; border-left-style: none;'>
 				<tr>

@@ -7,8 +7,7 @@
 	<script language="javascript" type="text/javascript" src="js/wateon.js"></script>
 </head>
 <body>
-	<p>subject : Advanced Web Programming Design and Practice (SoongSil Univ.)</p>
-	<h1>WateOn</h1>
+	<h1><img src="image/wateon_logo.gif" alt="WateOn" title="WateOn" /></h1>
 	<p>WateOn is the NateOn that is serviced in SK using web browser.</p>
 	
 	<a href="login.jsp"
