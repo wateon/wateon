@@ -13,8 +13,6 @@ import org.json.simple.JSONObject;
 
 import wateon.WateOn;
 import wateon.WateOnUser;
-import wateon.DB.MessageDAO;
-import wateon.DB.MessageDTO;
 
 public class ChatServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -88,8 +86,6 @@ public class ChatServlet extends HttpServlet {
 		json.put("result", result);
 		json.put("msg", msg);
 		writer.println(json);
-		MessageDTO dto = new MessageDTO(myself.getId(), targetId, msg);
-		new MessageDAO().insertMessage(dto);
 	}
 
 	private void viewChatRoomPage(String targetId, HttpServletRequest request, HttpServletResponse response)

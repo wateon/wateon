@@ -7,8 +7,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import wateon.DB.MessageDAO;
-import wateon.DB.MessageDTO;
 import wateon.entity.ChatRoom;
 import kfmes.natelib.NateonMessenger;
 import kfmes.natelib.SwitchBoardSession;
@@ -138,8 +136,6 @@ public class WateOnUser {
 	 */
 	public void addInstanceMessage(InstanceMessage imessage) {
 		synchronized (instanceMessageQ) {
-			MessageDTO dto = new MessageDTO(imessage.getFrom(), id, imessage.getMessage());
-			new MessageDAO().insertIMessage(dto);
 			instanceMessageQ.add(imessage);
 		}
 	}
