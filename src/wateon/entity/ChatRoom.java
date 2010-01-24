@@ -5,8 +5,6 @@ import java.util.LinkedList;
 import java.util.List;
 
 import wateon.WateOnUser;
-import wateon.DB.MessageDAO;
-import wateon.DB.MessageDTO;
 
 import kfmes.natelib.SwitchBoardSession;
 import kfmes.natelib.entity.NateFriend;
@@ -54,8 +52,6 @@ public class ChatRoom {
 	 */
 	public synchronized void addNewMessage(Message msg) {
 		receivedMessageQ.add(msg);
-		MessageDTO dto = new MessageDTO(msg.getId(), self.getId(), msg.getMessage());
-		new MessageDAO().insertMessage(dto);
 		addTyping(null, false);
 	}
 
